@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray5"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:background="@mipmap/self_bj"
+        android:orientation="horizontal">
+
+        <com.example.administrator.laundry.view.CircleImageview
+            android:id="@+id/img_head_portrait"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/user_pic"
+           />
+
+        <ImageView
+            android:id="@+id/img_head_sex"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/img_head_portrait"
+            android:layout_alignRight="@id/img_head_portrait"
+            android:layout_gravity="center"
+            android:layout_marginLeft="-30dp"
+            android:background="@mipmap/self_touxiang" />
+
+        <ImageView
+            android:id="@+id/img_head_sex_chose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/img_head_portrait"
+            android:layout_alignRight="@id/img_head_portrait"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="4dp" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="65dp"
+            android:layout_toRightOf="@id/img_head_sex"
+            android:text="月月爱吃鱼"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/img_loc"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/tv_user_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/img_head_portrait"
+            android:background="@mipmap/self_zb" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_user_name"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/img_loc"
+            android:text="北京市海淀区"
+            android:textColor="@color/white"
+            android:textSize="11sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/user_head_portrait"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_self_favorite"
+            style="@style/user_manager_linear_layout">
+
+            <ImageView
+                style="@style/list_left_img"
+                android:background="@mipmap/self_sc" />
+
+            <TextView
+                style="@style/list_text"
+                android:text="我的收藏" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                style="@style/list_right_img"
+                android:background="@mipmap/self_open_jump" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray5" />
+
+        <LinearLayout
+            android:id="@+id/ll_lx_map"
+            style="@style/user_manager_linear_layout">
+
+            <ImageView
+                style="@style/list_left_img"
+                android:background="@mipmap/map_cj_sel" />
+
+            <TextView
+                style="@style/list_text"
+                android:text="我的贴子" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                style="@style/list_right_img"
+                android:background="@mipmap/self_open_jump" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray5" />
+
+        <LinearLayout
+            android:id="@+id/ll_no_upload"
+            style="@style/user_manager_linear_layout">
+
+            <ImageView
+                style="@style/list_left_img"
+                android:background="@mipmap/self_shezhi" />
+
+            <TextView
+                style="@style/list_text"
+                android:text="设置" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                style="@style/list_right_img"
+                android:background="@mipmap/self_open_jump" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

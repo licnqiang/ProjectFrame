@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bg_title">#FF4081</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_blue">#99D8DFEF</color>
+    <color name="transparent_white">#E6ffffff</color>
+    <color name="all_transparent_white">#ffffffff</color>
+    <!--常用颜色-->
+    <color name="white">#ffffff</color>
+    <color name="light_gray">#E2E9EF</color>
+    <color name="grayB">#BDBBBC</color>
+    <color name="them_bule">#0CC3FF</color>
+    <color name="query_text">#adb5c2</color>
+    <color name="gray5">#f5f5f5</color>
+    <color name="home_address_textcolor">#5C6275</color>
+    <color name="txthint_search">#BCCBDB</color>
+    //黑色字体颜色
+    <color name="them_black_font">#5B5B5B</color>
+    //灰色提示字体颜色
+    <color name="them_tip_font">#C4C4C4</color>
+    <color name="them_tip_orange">#F09074</color>
+    <color name="light_green">#5EDBED</color>
+    //页面背景色
+    <color name="bg_page">#F2F2F2</color>
+    <color name="black_user">#2D2D2D</color>
+</resources>
