@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.base.BaseApplication;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,8 +48,26 @@ public class SetActivity extends BaseActivity {
             case R.id.about:
                 break;
             case R.id.ll_exit:
-                System.exit(0);
+                logOut();
                 break;
         }
+    }
+
+    public void logOut() {
+        EMClient.getInstance().logout(false, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                BaseApplication.closeAllActivityByMap();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
     }
 }
