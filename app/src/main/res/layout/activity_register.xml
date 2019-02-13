@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/regitster_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray5"
+    android:orientation="vertical"
     tools:context=".activity.RegisterActivity">
 
     <include layout="@layout/common_title" />
@@ -23,18 +24,18 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_marginTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:background="@drawable/edit_frame"
-                android:layout_height="80dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="头像" />
+                    android:text="头像"
+                    android:textColor="@color/them_black_font" />
 
                 <ImageView
                     android:id="@+id/user_image"
@@ -48,16 +49,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="昵称" />
+                    android:text="昵称"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_name"
@@ -65,9 +66,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入昵称"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -75,16 +76,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="电话号" />
+                    android:text="电话号"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_phone"
@@ -93,8 +94,8 @@
                     android:background="@null"
                     android:hint="请输入电话号"
                     android:paddingLeft="20dp"
-                    android:textColorHint="@color/them_black_font"
                     android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -102,25 +103,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="性别" />
+                    android:text="性别"
+                    android:textColor="@color/them_black_font" />
 
                 <TextView
                     android:id="@+id/et_user_sex"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -128,16 +129,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="验证码" />
+                    android:text="验证码"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_code"
@@ -145,9 +146,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入验证码"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -155,26 +156,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="登陆密码" />
+                    android:text="登陆密码"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_login_psw"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:hint="请输入登陆密码"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -183,16 +184,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="从业时间" />
+                    android:text="从业时间"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_time"
@@ -200,9 +201,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入从业时间"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -210,16 +211,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="店铺名称" />
+                    android:text="店铺名称"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_store_name"
@@ -227,9 +228,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入店铺名称"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -237,26 +238,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="店铺位置" />
+                    android:text="店铺位置"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_store_location"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:hint="请输入店铺位置"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -264,26 +265,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="个人签名" />
+                    android:text="个人签名"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:hint="请输入个人签名"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -291,16 +292,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
                 android:paddingLeft="10dp"
-               android:paddingRight="10dp"
-                android:background="@drawable/edit_frame">
+                android:paddingRight="10dp">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:textColor="@color/them_black_font"
-                    android:text="个人简介" />
+                    android:text="个人简介"
+                    android:textColor="@color/them_black_font" />
 
                 <EditText
                     android:id="@+id/et_user_centent"
@@ -308,9 +309,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入个人简介"
-                    android:textColorHint="@color/them_black_font"
-                    android:textColor="@color/them_black_font"
                     android:paddingLeft="20dp"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
 

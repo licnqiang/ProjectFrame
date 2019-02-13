@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.example.administrator.laundry.adapter.InputTipsAdapter;
 import com.example.administrator.laundry.adapter.SearchRecordAdapter;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.util.SpHelper;
+import com.example.administrator.laundry.view.LoadDataView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,16 @@ public class SearchActivity extends BaseActivity {
         setRecordAdapter();
 
         setRecordData();
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
     }
 
     private void setRecordData() {

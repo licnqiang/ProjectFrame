@@ -2,10 +2,12 @@ package com.example.administrator.laundry.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.view.LoadDataView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +30,16 @@ public class ChangPswActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
 
     }
 

@@ -2,10 +2,12 @@ package com.example.administrator.laundry.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.view.Window;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.view.LoadDataView;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 
 public class ChatActivity extends BaseActivity {
@@ -13,7 +15,6 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         EaseChatFragment easeChatFragment = new EaseChatFragment();  //环信聊天界面
         easeChatFragment.setArguments(getIntent().getExtras()); //需要的参数
@@ -33,6 +34,16 @@ public class ChatActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
 
     }
 }

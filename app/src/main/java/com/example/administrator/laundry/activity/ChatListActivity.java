@@ -3,9 +3,11 @@ package com.example.administrator.laundry.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.view.LoadDataView;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -29,6 +31,16 @@ public class ChatListActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
 
     }
 

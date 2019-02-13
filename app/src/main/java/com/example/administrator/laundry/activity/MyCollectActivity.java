@@ -2,11 +2,13 @@ package com.example.administrator.laundry.activity;
 
 
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.adapter.HomeAdapter;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.view.LoadDataView;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -37,6 +39,16 @@ public class MyCollectActivity extends BaseActivity {
     @Override
     protected void initData() {
         setAdapter();
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
     }
 
     private void setAdapter() {
