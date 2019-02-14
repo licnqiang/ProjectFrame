@@ -37,4 +37,5 @@ dependencies {
     implementation "com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2"
     implementation "com.google.code.gson:gson:2.8.0"
     implementation project(':easeui')
+    implementation project(':NetService')
 }

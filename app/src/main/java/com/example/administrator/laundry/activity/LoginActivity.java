@@ -11,7 +11,6 @@ import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.example.administrator.laundry.view.progress.LSProgressDialog;
-import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
