@@ -14,6 +14,7 @@ import com.example.administrator.laundry.view.progress.LSProgressDialog;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -82,13 +83,6 @@ public class LoginActivity extends BaseActivity {
 //                         EMClient.getInstance().groupManager().loadAllGroups();
                         // 加载所有会话到内存
                         EMClient.getInstance().chatManager().loadAllConversations();
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.e("----------","-----好友列表-----"+EMClient.getInstance().contactManager().getBlackListUsernames());
-                            }
-                        });
-                        ToastUtil.show(LoginActivity.this, "登录，成功开始聊天吧");
                         toActivity(MainActivity.class);
                         finish();
                     }

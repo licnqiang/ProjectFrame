@@ -32,7 +32,7 @@ public class BottomBar extends View {
 
     private int containerId;
 
-    private List<Class> fragmentClassList = new ArrayList<>();
+    private List<Fragment> fragmentClassList = new ArrayList<>();
     private List<String> titleList = new ArrayList<>();
     private List<Integer> iconResBeforeList = new ArrayList<>();
     private List<Integer> iconResAfterList = new ArrayList<>();
@@ -89,7 +89,7 @@ public class BottomBar extends View {
         return this;
     }
 
-    public BottomBar addItem(Class fragmentClass, String title, int iconResBefore, int iconResAfter) {
+    public BottomBar addItem(Fragment fragmentClass, String title, int iconResBefore, int iconResAfter) {
         fragmentClassList.add(fragmentClass);
         titleList.add(title);
         iconResBeforeList.add(iconResBefore);
@@ -117,13 +117,9 @@ public class BottomBar extends View {
             Rect rect = new Rect();
             iconRectList.add(rect);
 
-            Class clx = fragmentClassList.get(i);
-            try {
-                Fragment fragment = (Fragment) clx.newInstance();
-                fragmentList.add(fragment);
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            Fragment clx = fragmentClassList.get(i);
+            Fragment fragment = clx;
+            fragmentList.add(fragment);
         }
 
         currentCheckedIndex = firstCheckedIndex;
@@ -154,13 +150,13 @@ public class BottomBar extends View {
             int parentItemHeight = getHeight();
             int iconWidth = dp2px(this.iconWidth);
             int iconHeight = dp2px(this.iconHeight);
-            int textIconMargin = dp2px(((float)titleIconMargin)/2);
+            int textIconMargin = dp2px(((float) titleIconMargin) / 2);
             int titleSize = dp2px(titleSizeInDp);
             paint.setTextSize(titleSize);
             Rect rect = new Rect();
             paint.getTextBounds(titleList.get(0), 0, titleList.get(0).length(), rect);
             int titleHeight = rect.height();
-            int iconTop = (parentItemHeight - iconHeight - textIconMargin - titleHeight)/2;
+            int iconTop = (parentItemHeight - iconHeight - textIconMargin - titleHeight) / 2;
             titleBaseLine = parentItemHeight - iconTop;
             int firstRectX = (parentItemWidth - iconWidth) / 2;
             for (int i = 0; i < itemCount; i++) {
@@ -169,11 +165,11 @@ public class BottomBar extends View {
                 Rect temp = iconRectList.get(i);
 
                 temp.left = rectX;
-                temp.top = iconTop ;
+                temp.top = iconTop;
                 temp.right = rectX + iconWidth;
                 temp.bottom = iconTop + iconHeight;
             }
-            for (int i = 0; i < itemCount; i ++) {
+            for (int i = 0; i < itemCount; i++) {
                 String title = titleList.get(i);
                 paint.getTextBounds(title, 0, title.length(), rect);
                 titleXList.add((parentItemWidth - rect.width()) / 2 + parentItemWidth * i);
@@ -185,6 +181,7 @@ public class BottomBar extends View {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -205,7 +202,7 @@ public class BottomBar extends View {
 
             //画文字
             paint.setAntiAlias(true);
-            for (int i = 0; i < itemCount; i ++) {
+            for (int i = 0; i < itemCount; i++) {
                 String title = titleList.get(i);
                 if (i == currentCheckedIndex) {
                     paint.setColor(titleColorAfter);
@@ -224,14 +221,14 @@ public class BottomBar extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN :
-                target = withinWhichArea((int)event.getX());
+            case MotionEvent.ACTION_DOWN:
+                target = withinWhichArea((int) event.getX());
                 break;
-            case MotionEvent.ACTION_UP :
+            case MotionEvent.ACTION_UP:
                 if (event.getY() < 0) {
                     break;
                 }
-                if (target == withinWhichArea((int)event.getX())) {
+                if (target == withinWhichArea((int) event.getX())) {
                     //这里触发点击事件
                     switchFragment(target);
                     currentCheckedIndex = target;
@@ -239,19 +236,23 @@ public class BottomBar extends View {
                 }
                 target = -1;
                 break;
-                default:
+            default:
         }
         return true;
     }
 
-    private int withinWhichArea(int x) { return x/parentItemWidth; }
+    private int withinWhichArea(int x) {
+        return x / parentItemWidth;
+    }
+
     private Fragment currentFragment;
+
     protected void switchFragment(int whichFragment) {
         Fragment fragment = fragmentList.get(whichFragment);
         int frameLayoutId = containerId;
 
         if (fragment != null) {
-            FragmentTransaction transaction = ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
+            FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
             if (fragment.isAdded()) {
                 if (currentFragment != null) {
                     transaction.hide(currentFragment).show(fragment);
