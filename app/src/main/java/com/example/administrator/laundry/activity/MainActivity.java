@@ -37,8 +37,8 @@ import static android.content.ContentValues.TAG;
 public class MainActivity extends BaseActivity {
     private MapFragment mapFragment = new MapFragment();
     private MeFragment meFragment = new MeFragment();
-    private EaseContactListFragment easeContactListFragment=new EaseContactListFragment();
-    private EaseConversationListFragment conversationFragment=new EaseConversationListFragment();
+    private EaseContactListFragment easeContactListFragment = new EaseContactListFragment();
+    private EaseConversationListFragment conversationFragment = new EaseConversationListFragment();
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
     @BindView(R.id.bottom_bar)
@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
         setContactData();
         setConversation();
         bottomBar.setContainer(R.id.fl_container)
-                .setTitleSize(14)
+                .setTitleSize(12)
                 .setTitleBeforeAndAfterColor("#999999", "#1587FD")
                 .addItem(mapFragment,
                         "首页",
@@ -63,8 +63,8 @@ public class MainActivity extends BaseActivity {
                         R.mipmap.main_ziyuan_sel)
                 .addItem(conversationFragment,
                         "消息",
-                        R.mipmap.main_qunzu,
-                        R.mipmap.main_qunzu_sel)
+                        R.mipmap.home_tab_msg_n,
+                        R.mipmap.home_tab_msg_p)
                 .addItem(easeContactListFragment,
                         "联系人",
                         R.mipmap.main_qunzu,
@@ -77,13 +77,16 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 回话界面
+     * 回话列表界面
      */
     private void setConversation() {
         conversationFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
             @Override
             public void onListItemClicked(EMConversation conversation) {
-                startActivity(new Intent(MainActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID,conversation.conversationId()));
+                /**
+                 * 跳转会话界面
+                 */
+                startActivity(new Intent(MainActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId()));
             }
         });
     }
@@ -99,15 +102,18 @@ public class MainActivity extends BaseActivity {
                 easeContactListFragment.setContactsMap(getContact());
             }
         }.start();
-        //设置item点击事件
+        /**
+         * 跳转会话界面
+         */
         easeContactListFragment.setContactListItemClickListener(new EaseContactListFragment.EaseContactListItemClickListener() {
-
             @Override
             public void onListItemClicked(EaseUser user) {
                 startActivity(new Intent(MainActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, user.getUsername()));
             }
         });
-
+        /***
+         * 显示联系人变化，及时更新
+         */
         EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
 
 
@@ -190,6 +196,11 @@ public class MainActivity extends BaseActivity {
         super.onAttachFragment(fragment);
     }
 
+    /**
+     * 获取联系人
+     *
+     * @return
+     */
     private Map<String, EaseUser> getContact() {
         Map<String, EaseUser> map = new HashMap<>();
         try {

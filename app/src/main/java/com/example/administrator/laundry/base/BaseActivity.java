@@ -1,11 +1,14 @@
 package com.example.administrator.laundry.base;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.view.LoadDataView;
 
 import butterknife.ButterKnife;
@@ -21,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         BaseApplication.putActivityInfoToMap(this);
         setContentView(getLayoutId());
         mBind = ButterKnife.bind(this);
+        sethidTitle();
         initView();
         initViewGroup();
         initData();
@@ -40,8 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 嵌入loaddataview
      */
     private void initViewGroup() {
-
-
         ViewGroup view = loadDataViewLayout();
         if (null != view) {
             ViewGroup viewGroup = (ViewGroup) view.getParent();
@@ -67,6 +69,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void toActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
+    }
+
+    /**
+     * 设置手机title
+     */
+    protected void sethidTitle() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            //noinspection AliDeprecation
+            getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
+        }
     }
 
 }
