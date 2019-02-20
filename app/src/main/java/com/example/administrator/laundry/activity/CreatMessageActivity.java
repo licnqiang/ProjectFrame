@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.fragment.SelectImageFragment;
 import com.example.administrator.laundry.view.LoadDataView;
 
 import butterknife.BindView;
@@ -18,6 +19,7 @@ public class CreatMessageActivity extends BaseActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    private SelectImageFragment selectImageFragment;
 
     @Override
     protected int getLayoutId() {
@@ -41,7 +43,16 @@ public class CreatMessageActivity extends BaseActivity {
 
     @Override
     protected void getLoadView(LoadDataView loadView) {
+        setFragment();
+    }
 
+    /**
+     * 设置图片选择fragment
+     */
+    private void setFragment() {
+        selectImageFragment = new SelectImageFragment();
+        selectImageFragment.setActivity(this);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_image, selectImageFragment).commitAllowingStateLoss();
     }
 
     @OnClick({R.id.img_back, R.id.btn_send})

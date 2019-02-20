@@ -3,12 +3,15 @@ package com.example.administrator.laundry.base;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
+
 import com.example.administrator.laundry.util.SpHelper;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,7 +20,10 @@ import java.util.Map;
 
 public class BaseApplication extends Application {
     public static Map<String, Activity> activityMap = new HashMap<String, Activity>();        //管理activity 的容器
-    private static BaseApplication instance;
+    public static String token = "";
+    public static String os = "AD";
+    public static String version = "100";
+    public static Context ApplicationContext;
     // 记录是否已经初始化
     private boolean isInit = false;
 
@@ -26,6 +32,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ApplicationContext = getApplicationContext();
         SpHelper.init(getApplicationContext());
         //设置环信
         initEase();
@@ -109,14 +116,6 @@ public class BaseApplication extends Application {
         return null;
     }
 
-
-    public static BaseApplication getInstance() {
-        if (instance == null) {
-            instance = new BaseApplication();
-        }
-        return instance;
-    }
-
     //收集创建的Activity
     public static void putActivityInfoToMap(Activity activity) {
         if (activity != null) {
@@ -137,6 +136,7 @@ public class BaseApplication extends Application {
             }
         }
     }
+
     //关闭所有界面
     public static void closeAllActivityByMap() {
         if (!activityMap.isEmpty()) {

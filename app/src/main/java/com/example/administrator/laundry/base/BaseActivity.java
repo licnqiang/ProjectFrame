@@ -17,7 +17,6 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
     Unbinder mBind;
     private LoadDataView mLoadView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

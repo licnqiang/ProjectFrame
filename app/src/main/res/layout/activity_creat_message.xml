@@ -47,10 +47,11 @@
                     android:text="上传图片"
                     android:textColor="@color/them_black_font" />
 
-                <ImageView
+                <FrameLayout
+                    android:id="@+id/fragment_image"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:src="@mipmap/collect_pic" />
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 

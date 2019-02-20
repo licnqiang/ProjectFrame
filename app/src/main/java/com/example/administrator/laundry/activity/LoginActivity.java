@@ -1,20 +1,24 @@
 package com.example.administrator.laundry.activity;
 
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.administrator.laundry.NetService.control.NetControl;
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.constant.SysContant;
+import com.example.administrator.laundry.util.SpHelper;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.example.administrator.laundry.view.progress.LSProgressDialog;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +31,8 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.et_user_psw)
     EditText etUserPsw;
     private LSProgressDialog progressDialog;
+
+    HashMap<String, String> mHashMap = new HashMap<>();
 
     @Override
     protected int getLayoutId() {
@@ -63,12 +69,22 @@ public class LoginActivity extends BaseActivity {
                 toActivity(ForgetPswActivity.class);
                 break;
             case R.id.btn_login:
-                login();
+                String userName = etUserName.getText().toString().trim();
+                String userPsw = etUserPsw.getText().toString().trim();
+                if (userName.isEmpty() || userPsw.isEmpty()) {
+                    ToastUtil.show(LoginActivity.this, "用户名或密码不能为空");
+                } else {
+                    mHashMap.put("userPhone", userName);
+                    mHashMap.put("userPassword", userPsw);
+                    NetControl.Login(callback, mHashMap);
+                }
                 break;
         }
     }
 
-
+    /**
+     * 登录环信服务器
+     */
     public void login() {
         progressDialog = new LSProgressDialog(this);
         progressDialog.show();
@@ -141,6 +157,29 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
+
+    /**
+     * 登录自己服务器
+     */
+    NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            //保存token
+            SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, o.toString());
+            //登录环信
+//            login();
+        }
+
+        @Override
+        public void onErro(Object o) {
+            BaseReseponseInfo baseReseponseInfo = (BaseReseponseInfo) o;
+            if (null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
+                ToastUtil.show(LoginActivity.this, baseReseponseInfo.getInfo());
+            } else {
+                ToastUtil.show(LoginActivity.this, "用户名/密码错误");
+            }
+        }
+    };
 
 }
 
