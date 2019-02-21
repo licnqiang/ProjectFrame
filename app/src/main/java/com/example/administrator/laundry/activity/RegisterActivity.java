@@ -1,16 +1,19 @@
 package com.example.administrator.laundry.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.util.GlideImageLoader;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.example.administrator.laundry.view.SelectDialog;
@@ -18,6 +21,9 @@ import com.example.administrator.laundry.view.progress.LSProgressDialog;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +36,8 @@ public class RegisterActivity extends BaseActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.user_image)
+    ImageView userImage;
     @BindView(R.id.et_user_name)
     EditText etUserName;
     @BindView(R.id.et_user_phone)
@@ -52,8 +60,9 @@ public class RegisterActivity extends BaseActivity {
     EditText etUserCentent;
     @BindView(R.id.regitster_layout)
     LinearLayout regitsterLayout;
-
+    public static final int REQUEST_CODE_SELECT = 100;
     private LSProgressDialog progressDialog;
+    private ArrayList<ImageItem> images;
 
     @Override
     protected int getLayoutId() {
@@ -79,9 +88,12 @@ public class RegisterActivity extends BaseActivity {
     protected void getLoadView(LoadDataView loadView) {
     }
 
-    @OnClick({R.id.img_back, R.id.et_user_sex, R.id.btn_register})
+    @OnClick({R.id.img_back, R.id.et_user_sex, R.id.btn_register,R.id.user_image})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.user_image:
+                showPicDialog();
+                break;
             case R.id.img_back:
                 finish();
                 break;
@@ -189,10 +201,53 @@ public class RegisterActivity extends BaseActivity {
         }).start();
     }
 
+    private void showPicDialog() {
+        List<String> names = new ArrayList<>();
+        names.add("拍照");
+        names.add("相册");
+        showDialog(new SelectDialog.SelectDialogListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0: // 直接调起相机
+                        //打开选择,本次允许选择的数量
+                        ImagePicker.getInstance().setImageLoader(new GlideImageLoader());
+                        ImagePicker.getInstance().setMultiMode(false);
+                        ImagePicker.getInstance().setCrop(false);
+                        ImagePicker.getInstance().setShowCamera(false);
+                        Intent intent = new Intent(RegisterActivity.this, ImageGridActivity.class);
+                        intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
+                        startActivityForResult(intent, REQUEST_CODE_SELECT);
+                        break;
+                    case 1:
+                        //打开选择,本次允许选择的数量
+                        ImagePicker.getInstance().setImageLoader(new GlideImageLoader());
+                        ImagePicker.getInstance().setMultiMode(false);
+                        ImagePicker.getInstance().setCrop(false);
+                        ImagePicker.getInstance().setShowCamera(false);
+                        Intent intent1 = new Intent(RegisterActivity.this, ImageGridActivity.class);
+                        startActivityForResult(intent1, REQUEST_CODE_SELECT);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }, names);
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            //添加图片返回
+            if (data != null && requestCode == REQUEST_CODE_SELECT) {
+                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images != null) {
+                    ImagePicker.getInstance().getImageLoader().displayImage(this, images.get(0).path, userImage, 0, 0);
+                }
+            }
+        }
     }
 }
