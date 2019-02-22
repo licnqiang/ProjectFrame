@@ -54,7 +54,6 @@ public class ForgetPswActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
-                judgeData();
                 finish();
                 break;
             case R.id.btn_forgetPsw:

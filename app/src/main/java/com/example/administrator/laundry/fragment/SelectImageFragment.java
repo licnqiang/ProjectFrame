@@ -69,7 +69,7 @@ public class SelectImageFragment extends BaseFragment {
         adapter = new ImagePickerAdapter(activity, selImageList, maxImgCount);
         adapter.setOnItemClickListener(onRecyclerViewItemClickListener);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(activity, 4));
+        recyclerView.setLayoutManager(new GridLayoutManager(activity, 3));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }

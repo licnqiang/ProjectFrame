@@ -33,7 +33,7 @@ public class CreatMessageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        setFragment();
     }
 
     @Override
@@ -43,7 +43,6 @@ public class CreatMessageActivity extends BaseActivity {
 
     @Override
     protected void getLoadView(LoadDataView loadView) {
-        setFragment();
     }
 
     /**
@@ -51,6 +50,7 @@ public class CreatMessageActivity extends BaseActivity {
      */
     private void setFragment() {
         selectImageFragment = new SelectImageFragment();
+        SelectImageFragment.maxImgCount = 6;
         selectImageFragment.setActivity(this);
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_image, selectImageFragment).commitAllowingStateLoss();
     }

@@ -1,20 +1,14 @@
 package com.example.administrator.laundry.fragment;
 
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.activity.CreatMessageActivity;
+import com.example.administrator.laundry.activity.MessagDetailActivity;
 import com.example.administrator.laundry.activity.SearchActivity;
 import com.example.administrator.laundry.adapter.HomeAdapter;
 import com.example.administrator.laundry.base.BaseFragment;
@@ -32,7 +26,7 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerViewItemClickListener{
+public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerViewItemClickListener {
     private static PopupWindow projectSelectLayer;
     @BindView(R.id.home_preject)
     TextView homePreject;
@@ -72,6 +66,7 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
     private void setAdapter() {
         listItem = new ArrayList<>();
         homeAdapter = new HomeAdapter(getActivity(), listItem);
+        homeAdapter.setOnItemClickListener(this);
         pullLoadMoreRecyclerView.setLinearLayout();
         pullLoadMoreRecyclerView.setPullRefreshEnable(false);
         pullLoadMoreRecyclerView.setPushRefreshEnable(false);
@@ -120,11 +115,12 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
 
     /**
      * 点击条目
+     *
      * @param view
      * @param position
      */
     @Override
     public void onItemClick(View view, int position) {
-
+        toActivity(MessagDetailActivity.class);
     }
 }

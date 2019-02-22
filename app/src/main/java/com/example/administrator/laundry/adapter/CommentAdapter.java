@@ -1,6 +1,5 @@
 package com.example.administrator.laundry.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,18 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
-import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
-import java.util.ArrayList;
+
 import java.util.List;
 
 
 /**
  * 图片选择适配器
  */
-public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.SelectedPicViewHolder> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.SelectedPicViewHolder> {
     public static final int IMAGE_ITEM_ADD = -1;
     public int maxImgCount;
     private Context mContext;
@@ -36,36 +33,15 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
         this.listener = listener;
     }
 
-    public void setImages(List<ImageItem> data) {
-        mData = new ArrayList<>(data);
-        if (getItemCount() < maxImgCount) {
-            mData.add(new ImageItem());
-            isAdded = true;
-        } else {
-            isAdded = false;
-        }
-        notifyDataSetChanged();
-    }
 
-    public List<ImageItem> getImages() {
-        //由于图片未选满时，最后一张显示添加图片，因此这个方法返回真正的已选图片
-        if (isAdded) {
-            return new ArrayList<>(mData.subList(0, mData.size() - 1));
-        } else {
-            return mData;
-        }
-    }
-
-    public ImagePickerAdapter(Context mContext, List<ImageItem> data, int maxImgCount) {
+    public CommentAdapter(Context mContext) {
         this.mContext = mContext;
-        this.maxImgCount = maxImgCount;
         this.mInflater = LayoutInflater.from(mContext);
-        setImages(data);
     }
 
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SelectedPicViewHolder(mInflater.inflate(R.layout.list_item_image, parent, false));
+        return new SelectedPicViewHolder(mInflater.inflate(R.layout.list_item_comment, parent, false));
     }
 
     @Override
@@ -75,7 +51,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return 6;
     }
 
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -92,14 +68,14 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
             //设置条目的点击事件
             itemView.setOnClickListener(this);
             //根据条目位置设置图片
-            ImageItem item = mData.get(position);
-            if (isAdded && position == getItemCount() - 1) {
-                    iv_img.setImageResource(R.mipmap.image_add_sel);
-                    clickPosition = IMAGE_ITEM_ADD;
-            } else {
-                ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, 0, 0);
-                clickPosition = position;
-            }
+//            String item = "";
+//            Glide.with(mContext)                             //配置上下文
+//                    .load("")      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
+//                    .error(R.mipmap.collect_mrtp)           //设置错误图片
+//                    .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
+//                    .into(iv_img);
+            clickPosition = position;
         }
 
         @Override

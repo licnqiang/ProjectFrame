@@ -22,6 +22,7 @@
     //灰色提示字体颜色
     <color name="them_tip_font">#C4C4C4</color>
     <color name="them_tip_orange">#F09074</color>
+    <color name="create_text">#5A5959</color>
     <color name="light_green">#5EDBED</color>
     //页面背景色
     <color name="bg_page">#F2F2F2</color>
