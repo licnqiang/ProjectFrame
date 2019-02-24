@@ -37,7 +37,7 @@ public class ForgetPswActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        tvTitle.setText("个人详情");
     }
 
     @Override

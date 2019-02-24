@@ -120,6 +120,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:paddingLeft="20dp"
+                    android:gravity="center_vertical"
                     android:textColor="@color/them_black_font"
                     android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />

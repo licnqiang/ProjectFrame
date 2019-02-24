@@ -31,6 +31,7 @@
         <item name="android:paddingRight">10dp</item>
         <item name=" android:gravity">center_vertical|right</item>
         <item name=" android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
         <item name=" android:textColor">@color/them_black_font</item>
         <item name=" android:textSize">14sp</item>
     </style>

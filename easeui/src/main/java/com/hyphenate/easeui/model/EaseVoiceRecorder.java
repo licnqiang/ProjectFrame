@@ -113,7 +113,7 @@ public class EaseVoiceRecorder {
     public int stopRecoding() {
         if(recorder != null){
             isRecording = false;
-            recorder.stop();
+//            recorder.stop();
             recorder.release();
             recorder = null;
             

@@ -25,6 +25,7 @@ public class GlideImageLoader implements ImageLoader {
                     .load(path)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .error(R.mipmap.collect_mrtp)           //设置错误图片
                     .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
+                    .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                     .into(imageView);
 

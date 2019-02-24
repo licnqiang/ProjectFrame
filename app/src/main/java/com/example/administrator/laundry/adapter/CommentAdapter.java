@@ -17,13 +17,10 @@ import java.util.List;
  * 图片选择适配器
  */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.SelectedPicViewHolder> {
-    public static final int IMAGE_ITEM_ADD = -1;
-    public int maxImgCount;
     private Context mContext;
     private List<ImageItem> mData;
     private LayoutInflater mInflater;
     private OnRecyclerViewItemClickListener listener;
-    public boolean isAdded;   //是否额外添加了最后一个图片
 
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, int position);
@@ -51,7 +48,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 7;
     }
 
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

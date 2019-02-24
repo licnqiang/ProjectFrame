@@ -103,6 +103,8 @@
         <activity android:name=".activity.ChatActivity" />
         <activity android:name=".activity.MessagDetailActivity" />
         <activity android:name=".activity.FriendInfoActivity"></activity>
-    </application>
+        <activity android:name=".activity.MyMessageActivity"></activity>
+        <activity android:name=".activity.myInfoActivity"></activity>
 
+</application>
 </manifest>

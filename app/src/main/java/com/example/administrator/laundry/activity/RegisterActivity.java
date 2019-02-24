@@ -88,24 +88,6 @@ public class RegisterActivity extends BaseActivity {
     protected void getLoadView(LoadDataView loadView) {
     }
 
-    @OnClick({R.id.img_back, R.id.et_user_sex, R.id.btn_register,R.id.user_image})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.user_image:
-                showPicDialog();
-                break;
-            case R.id.img_back:
-                finish();
-                break;
-            case R.id.et_user_sex:
-                showSexDialog();
-                break;
-            case R.id.btn_register:
-                register();
-                break;
-        }
-    }
-
 
     private void showSexDialog() {
         List<String> names = new ArrayList<>();
@@ -139,6 +121,7 @@ public class RegisterActivity extends BaseActivity {
         SelectDialog dialog = new SelectDialog(RegisterActivity.this, R.style
                 .transparentFrameWindowStyle,
                 listener, names);
+        dialog.show();
         return dialog;
     }
 
@@ -248,6 +231,32 @@ public class RegisterActivity extends BaseActivity {
                     ImagePicker.getInstance().getImageLoader().displayImage(this, images.get(0).path, userImage, 0, 0);
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.img_back, R.id.user_image, R.id.et_user_sex, R.id.btn_register})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                finish();
+                break;
+            case R.id.user_image:
+                showPicDialog();
+                break;
+            case R.id.et_user_sex:
+                showSexDialog();
+                break;
+            case R.id.btn_register:
+//                register();
+                finish();
+                break;
         }
     }
 }

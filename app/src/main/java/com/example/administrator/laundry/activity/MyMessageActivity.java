@@ -1,7 +1,6 @@
 package com.example.administrator.laundry.activity;
 
 
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,10 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MyCollectActivity extends BaseActivity implements HomeAdapter.OnRecyclerViewItemClickListener{
+public class MyMessageActivity extends BaseActivity implements HomeAdapter.OnRecyclerViewItemClickListener{
     @BindView(R.id.list)
     PullLoadMoreRecyclerView pullLoadMoreRecyclerView;
     @BindView(R.id.tv_title)
@@ -34,7 +32,7 @@ public class MyCollectActivity extends BaseActivity implements HomeAdapter.OnRec
 
     @Override
     protected void initView() {
-        tvTitle.setText("我的收藏");
+        tvTitle.setText("我的帖子");
     }
 
     @Override

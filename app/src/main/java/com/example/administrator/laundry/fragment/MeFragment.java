@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.activity.CreatMessageActivity;
 import com.example.administrator.laundry.activity.MyCollectActivity;
+import com.example.administrator.laundry.activity.MyMessageActivity;
 import com.example.administrator.laundry.activity.SetActivity;
+import com.example.administrator.laundry.activity.myInfoActivity;
 import com.example.administrator.laundry.base.BaseFragment;
 import com.example.administrator.laundry.view.CircleImageview;
 
@@ -52,13 +54,13 @@ public class MeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_head_portrait:
-                toActivity(MyCollectActivity.class);
+                toActivity(myInfoActivity.class);
                 break;
             case R.id.ll_self_favorite:
                 toActivity(MyCollectActivity.class);
                 break;
             case R.id.ll_lx_map:
-                toActivity(MyCollectActivity.class);
+                toActivity(MyMessageActivity.class);
                 break;
             case R.id.ll_no_upload:
                 toActivity(SetActivity.class);

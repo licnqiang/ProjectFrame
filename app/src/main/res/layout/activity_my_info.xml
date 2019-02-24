@@ -25,13 +25,15 @@
                 android:layout_height="70dp"
                 android:src="@mipmap/self" />
 
-            <TextView
+            <EditText
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="10dp"
+                android:background="@null"
                 android:text="爬坡的拖拉机"
+                android:textSize="16sp"
                 android:textColor="@color/them_black_font" />
         </LinearLayout>
 
@@ -65,7 +67,7 @@
                 style="@style/common_liner_lefttv_style"
                 android:text="生日" />
 
-            <TextView
+            <EditText
                 android:id="@+id/user_age"
                 style="@style/user_info_edit_style"
                 android:digits="1234567890"
@@ -89,6 +91,8 @@
             <EditText
                 android:id="@+id/user_phone"
                 style="@style/user_info_edit_style"
+                android:layout_alignParentTop="true"
+                android:textSize="16sp"
                 android:digits="1234567890-"
                 android:hint="18591053757" />
 
@@ -106,9 +110,10 @@
                 style="@style/common_liner_lefttv_style"
                 android:text="家庭住址" />
 
-            <TextView
+            <EditText
                 android:id="@+id/user_address"
                 style="@style/user_info_edit_style"
+                android:textSize="16sp"
                 android:hint="西安市未央区凤城八路" />
         </RelativeLayout>
     </LinearLayout>
@@ -124,7 +129,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="30dp"
         android:background="@mipmap/btn_p"
-        android:text="聊天"
+        android:text="提交"
         android:textColor="@color/white" />
 
 </LinearLayout>
