@@ -1,0 +1,27 @@
+{
+    "code": "200",
+    "msg": "请求成功",
+    "note": [
+        {
+            "noteContent": "帖子内容",
+            "noteId": 1,
+            "noteTime": "时间戳",
+            "userImgNumber": "用户头像编号",
+            "userNickname": "用户昵称"
+        },
+        {
+            "noteContent": "帖子内容",
+            "noteId": 1,
+            "noteTime": "时间戳",
+            "userImgNumber": "用户头像编号",
+            "userNickname": "用户昵称"
+        },
+        {
+            "noteContent": "帖子内容",
+            "noteId": 1,
+            "noteTime": "时间戳",
+            "userImgNumber": "用户头像编号",
+            "userNickname": "用户昵称"
+        }
+    ]
+}

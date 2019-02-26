@@ -3,6 +3,7 @@ package com.example.administrator.laundry.NetService.parser;
 
 
 import com.example.administrator.laundry.NetService.control.NetControl;
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.data.Login;
 import com.example.administrator.laundry.NetService.http.HttpConnector;
 import com.example.administrator.laundry.NetService.util.Log;
@@ -13,27 +14,27 @@ import java.util.HashMap;
 
 /**
  * @author lq
- * @fileName 登录解析层
+ * @fileName 注册解析层
  * @data on  2019/2/14 11:03
- * @describe 发送请求，解析登录返回数据
+ * @describe 发送请求，解析注册返回数据
  */
-public class LoginParser extends BaseParser {
+public class RegisterParser extends BaseParser {
 
-    private Login mInfo;
+    private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/DorLogin/resLogin";
+    private String url = "/userReg";
 
 
     private NetControl.GetResultListenerCallback listener;
 
-    public LoginParser(NetControl.GetResultListenerCallback listener, HashMap<String, String> mHashMap) {
+    public RegisterParser(NetControl.GetResultListenerCallback listener, HashMap<String, String> mHashMap) {
 
 
         this.listener = listener;
 
         setTest(true);
 
-        setTestFileName("LoginParser.txt");
+        setTestFileName("Common.txt");
 
         setParameters(mHashMap);
 
@@ -41,27 +42,22 @@ public class LoginParser extends BaseParser {
 
         setRequestMethod(HttpConnector.METHOD_POST);
 
-        setReturnInfo(mInfo);
+        setReturnInfo(baseReseponseInfo);
     }
 
 
     @Override
     protected void parser() {
-        try {
-            mInfo = new Gson().fromJson(mJson.toString(), Login.class);
-        } catch (Exception e) {
-            Log.e(TAG, CLASS_NAME + "--e==" + e);
-        }
     }
 
     @Override
     protected void Success() {
-        listener.onFinished(mInfo);
+        listener.onFinished(baseReseponseInfo);
     }
 
     @Override
     protected void Error() {
-        listener.onErro(mInfo);
+        listener.onErro(baseReseponseInfo);
     }
 
 }

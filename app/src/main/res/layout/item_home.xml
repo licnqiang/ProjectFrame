@@ -10,6 +10,7 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/user_head"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="fitCenter"
@@ -24,6 +25,7 @@
         android:paddingTop="10dp">
 
         <TextView
+            android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="爬坡的拖拉机"

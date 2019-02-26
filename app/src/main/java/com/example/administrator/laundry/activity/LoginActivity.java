@@ -69,16 +69,16 @@ public class LoginActivity extends BaseActivity {
                 toActivity(ForgetPswActivity.class);
                 break;
             case R.id.btn_login:
-//                String userName = etUserName.getText().toString().trim();
-//                String userPsw = etUserPsw.getText().toString().trim();
-//                if (userName.isEmpty() || userPsw.isEmpty()) {
-//                    ToastUtil.show(LoginActivity.this, "用户名或密码不能为空");
-//                } else {
-//                    mHashMap.put("userPhone", userName);
-//                    mHashMap.put("userPassword", userPsw);
-//                    NetControl.Login(callback, mHashMap);
-//                }
-                toActivity(MainActivity.class);
+                String userName = etUserName.getText().toString().trim();
+                String userPsw = etUserPsw.getText().toString().trim();
+                if (userName.isEmpty() || userPsw.isEmpty()) {
+                    ToastUtil.show(LoginActivity.this, "用户名或密码不能为空");
+                } else {
+                    mHashMap.put("userPhone", userName);
+                    mHashMap.put("userPassword", userPsw);
+                    NetControl.Login(callback, mHashMap);
+                }
+//                toActivity(MainActivity.class);
                 break;
         }
     }
@@ -168,7 +168,7 @@ public class LoginActivity extends BaseActivity {
             //保存token
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, o.toString());
             //登录环信
-//            login();
+            login();
         }
 
         @Override

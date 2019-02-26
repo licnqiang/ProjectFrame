@@ -3,7 +3,9 @@ package com.example.administrator.laundry.NetService.parser;
 
 
 import com.example.administrator.laundry.NetService.control.NetControl;
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.data.Login;
+import com.example.administrator.laundry.NetService.data.PostListBean;
 import com.example.administrator.laundry.NetService.http.HttpConnector;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.google.gson.Gson;
@@ -13,27 +15,27 @@ import java.util.HashMap;
 
 /**
  * @author lq
- * @fileName 登录解析层
+ * @fileName 忘记密码解析层
  * @data on  2019/2/14 11:03
- * @describe 发送请求，解析登录返回数据
+ * @describe 发送请求，解析忘记密码返回数据
  */
-public class LoginParser extends BaseParser {
+public class PostListParser extends BaseParser {
 
-    private Login mInfo;
+    private PostListBean mInfo;
 
-    private String url = "/DorLogin/resLogin";
+    private String url = "/getNoteALL";
 
 
     private NetControl.GetResultListenerCallback listener;
 
-    public LoginParser(NetControl.GetResultListenerCallback listener, HashMap<String, String> mHashMap) {
+    public PostListParser(NetControl.GetResultListenerCallback listener, HashMap<String, String> mHashMap) {
 
 
         this.listener = listener;
 
         setTest(true);
 
-        setTestFileName("LoginParser.txt");
+        setTestFileName("PostList.txt");
 
         setParameters(mHashMap);
 
@@ -48,7 +50,7 @@ public class LoginParser extends BaseParser {
     @Override
     protected void parser() {
         try {
-            mInfo = new Gson().fromJson(mJson.toString(), Login.class);
+            mInfo = new Gson().fromJson(mJson.toString(), PostListBean.class);
         } catch (Exception e) {
             Log.e(TAG, CLASS_NAME + "--e==" + e);
         }

@@ -3,6 +3,7 @@ package com.example.administrator.laundry.NetService.parser;
 
 
 import com.example.administrator.laundry.NetService.control.NetControl;
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.data.Login;
 import com.example.administrator.laundry.NetService.http.HttpConnector;
 import com.example.administrator.laundry.NetService.util.Log;
@@ -13,20 +14,20 @@ import java.util.HashMap;
 
 /**
  * @author lq
- * @fileName 登录解析层
+ * @fileName 获取验证码解析层
  * @data on  2019/2/14 11:03
- * @describe 发送请求，解析登录返回数据
+ * @describe 发送请求，解析获取验证码返回数据
  */
-public class LoginParser extends BaseParser {
+public class CodeParser extends BaseParser {
 
-    private Login mInfo;
+    private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
     private String url = "/DorLogin/resLogin";
 
 
     private NetControl.GetResultListenerCallback listener;
 
-    public LoginParser(NetControl.GetResultListenerCallback listener, HashMap<String, String> mHashMap) {
+    public CodeParser(NetControl.GetResultListenerCallback listener, HashMap<String, String> mHashMap) {
 
 
         this.listener = listener;
@@ -41,14 +42,13 @@ public class LoginParser extends BaseParser {
 
         setRequestMethod(HttpConnector.METHOD_POST);
 
-        setReturnInfo(mInfo);
+        setReturnInfo(baseReseponseInfo);
     }
 
 
     @Override
     protected void parser() {
         try {
-            mInfo = new Gson().fromJson(mJson.toString(), Login.class);
         } catch (Exception e) {
             Log.e(TAG, CLASS_NAME + "--e==" + e);
         }
@@ -56,12 +56,12 @@ public class LoginParser extends BaseParser {
 
     @Override
     protected void Success() {
-        listener.onFinished(mInfo);
+        listener.onFinished(baseReseponseInfo);
     }
 
     @Override
     protected void Error() {
-        listener.onErro(mInfo);
+        listener.onErro(baseReseponseInfo);
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.administrator.laundry.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,11 +11,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.administrator.laundry.NetService.control.NetControl;
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.base.BaseApplication;
 import com.example.administrator.laundry.util.GlideImageLoader;
+import com.example.administrator.laundry.util.RxDeviceTool;
 import com.example.administrator.laundry.util.ToastUtil;
+import com.example.administrator.laundry.view.CountDownTextView;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.example.administrator.laundry.view.SelectDialog;
 import com.example.administrator.laundry.view.progress.LSProgressDialog;
@@ -26,6 +34,7 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,9 +42,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity {
-
+    HashMap<String, String> mHashMap = new HashMap<>();
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.send_yzm)
+    CountDownTextView sendYzm;
     @BindView(R.id.user_image)
     ImageView userImage;
     @BindView(R.id.et_user_name)
@@ -54,8 +65,8 @@ public class RegisterActivity extends BaseActivity {
     EditText etUserStoreName;
     @BindView(R.id.et_user_store_location)
     EditText etUserStoreLocation;
-    @BindView(R.id.et_user_content)
-    EditText etUserContent;
+    @BindView(R.id.et_user_sign)
+    EditText etUserSign;
     @BindView(R.id.et_user_centent)
     EditText etUserCentent;
     @BindView(R.id.regitster_layout)
@@ -234,14 +245,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @OnClick({R.id.img_back, R.id.user_image, R.id.et_user_sex, R.id.btn_register})
+    @OnClick({R.id.img_back, R.id.user_image, R.id.et_user_sex, R.id.btn_register, R.id.et_user_yzm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -255,8 +259,133 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.btn_register:
 //                register();
+                meServerRister();
                 finish();
+                break;
+            case R.id.et_user_yzm:
+                sendYzm();
                 break;
         }
     }
+
+    private void sendYzm() {
+        String userPhone = etUserPhone.getText().toString();
+        if (TextUtils.isEmpty(userPhone)) {
+            ToastUtil.show(this, "请输入手机号");
+            sendYzm.reset();
+        } else {
+            if (!RxDeviceTool.isMobileNO(userPhone)) {
+                ToastUtil.show(this, "输入手机号有误");
+                sendYzm.reset();
+                return;
+            }
+            sendYzm.start();
+            mHashMap.put("userPhone", userPhone);
+            NetControl.GetCode(callback, mHashMap);
+        }
+    }
+
+    NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+
+        }
+
+        @Override
+        public void onErro(Object o) {
+            if (o != null) {
+                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+                int code = mBaseReseponseInfo.getFlag();
+                String msg = mBaseReseponseInfo.getInfo();
+                if (msg != null && msg.length() > 0) {
+                    Log.e("TAG-code", code + "");
+                    Log.e("TAG-msg", msg);
+                    Toast.makeText(
+                            BaseApplication.ApplicationContext,
+                            msg + " code:" + code,
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(RegisterActivity.this,
+                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
+    private void meServerRister() {
+        String userName = etUserName.getText().toString().trim();
+        String userPhone = etUserPhone.getText().toString().trim();
+        String userSex = etUserSex.getText().toString().trim();
+        String userCode = etUserCode.getText().toString().trim();
+        String userLoginPsw = etUserLoginPsw.getText().toString().trim();
+        String userTime = etUserTime.getText().toString().trim();
+        String userStoreName = etUserStoreName.getText().toString().trim();
+        String userStoreLocation = etUserStoreLocation.getText().toString().trim();
+        String userSign = etUserSign.getText().toString().trim();
+        String userCentent = etUserCentent.getText().toString().trim();
+
+        if (userName.isEmpty() ||
+                userPhone.isEmpty() ||
+                userSex.isEmpty() ||
+                userCode.isEmpty() ||
+                userLoginPsw.isEmpty() ||
+                userTime.isEmpty() ||
+                userStoreName.isEmpty() ||
+                userStoreLocation.isEmpty() ||
+                userSign.isEmpty() ||
+                userCentent.isEmpty()) {
+            ToastUtil.show(RegisterActivity.this, "请输入所有信息");
+        } else {
+            mHashMap.put("userPhone", userPhone);
+            mHashMap.put("proof", userCode);
+            mHashMap.put("userPassword", userLoginPsw);
+            mHashMap.put("userNickname", userName);
+            mHashMap.put("userImgNumber", "头像编号");
+            mHashMap.put("userSign", userSign);
+            mHashMap.put("userIntroduce", userCentent);
+            mHashMap.put("userSex", userSex);
+            mHashMap.put("userWworkingTime", userTime);
+            mHashMap.put("userShop", userStoreName);
+            mHashMap.put("userShopAddress", userStoreLocation);
+            NetControl.Register(regiserCallBack, mHashMap);
+        }
+
+    }
+
+    NetControl.GetResultListenerCallback regiserCallBack = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            BaseReseponseInfo info = (BaseReseponseInfo) o;
+            if (null != info && null != info.getInfo()) {
+                Toast.makeText(
+                        BaseApplication.ApplicationContext,
+                        info.getInfo(),
+                        Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        }
+
+        @Override
+        public void onErro(Object o) {
+            if (o != null) {
+                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+                int code = mBaseReseponseInfo.getFlag();
+                String msg = mBaseReseponseInfo.getInfo();
+                if (msg != null && msg.length() > 0) {
+                    Log.e("TAG-code", code + "");
+                    Log.e("TAG-msg", msg);
+                    Toast.makeText(
+                            BaseApplication.ApplicationContext,
+                            msg + " code:" + code,
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(RegisterActivity.this,
+                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
 }
