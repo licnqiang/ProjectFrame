@@ -1,7 +1,6 @@
 package com.example.administrator.laundry.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,10 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class myInfoActivity extends BaseActivity {
+public class MyInfoActivity extends BaseActivity {
 
     public static final int REQUEST_CODE_SELECT = 100;
     @BindView(R.id.tv_title)
@@ -85,6 +83,7 @@ public class myInfoActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.user_image:
+                showPicDialog();
                 break;
             case R.id.user_name:
                 break;
@@ -138,7 +137,7 @@ public class myInfoActivity extends BaseActivity {
                         ImagePicker.getInstance().setMultiMode(false);
                         ImagePicker.getInstance().setCrop(false);
                         ImagePicker.getInstance().setShowCamera(false);
-                        Intent intent = new Intent(myInfoActivity.this, ImageGridActivity.class);
+                        Intent intent = new Intent(MyInfoActivity.this, ImageGridActivity.class);
                         intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
                         startActivityForResult(intent, REQUEST_CODE_SELECT);
                         break;
@@ -148,7 +147,7 @@ public class myInfoActivity extends BaseActivity {
                         ImagePicker.getInstance().setMultiMode(false);
                         ImagePicker.getInstance().setCrop(false);
                         ImagePicker.getInstance().setShowCamera(false);
-                        Intent intent1 = new Intent(myInfoActivity.this, ImageGridActivity.class);
+                        Intent intent1 = new Intent(MyInfoActivity.this, ImageGridActivity.class);
                         startActivityForResult(intent1, REQUEST_CODE_SELECT);
                         break;
                     default:
@@ -167,7 +166,7 @@ public class myInfoActivity extends BaseActivity {
      * @return
      */
     private SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {
-        SelectDialog dialog = new SelectDialog(myInfoActivity.this, R.style
+        SelectDialog dialog = new SelectDialog(MyInfoActivity.this, R.style
                 .transparentFrameWindowStyle,
                 listener, names);
         dialog.show();

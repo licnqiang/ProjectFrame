@@ -1,24 +1,19 @@
 package com.example.administrator.laundry.fragment;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.administrator.laundry.R;
-import com.example.administrator.laundry.activity.CreatMessageActivity;
 import com.example.administrator.laundry.activity.MyCollectActivity;
 import com.example.administrator.laundry.activity.MyMessageActivity;
 import com.example.administrator.laundry.activity.SetActivity;
-import com.example.administrator.laundry.activity.myInfoActivity;
+import com.example.administrator.laundry.activity.MyInfoActivity;
 import com.example.administrator.laundry.base.BaseFragment;
 import com.example.administrator.laundry.view.CircleImageview;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -54,7 +49,7 @@ public class MeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_head_portrait:
-                toActivity(myInfoActivity.class);
+                toActivity(MyInfoActivity.class);
                 break;
             case R.id.ll_self_favorite:
                 toActivity(MyCollectActivity.class);

@@ -61,7 +61,6 @@ public class LoginParser extends BaseParser {
     @Override
     protected void Error() {
         listener.onErro(mInfo);
-
     }
 
 }
