@@ -1,0 +1,35 @@
+{
+    "code": "200",
+    "msg": "请求成功",
+        "userImgNumber":"wegewge",
+        "userNickname":"用户昵称",
+        "noteId":1,
+        "noteImgNumber":"wetrwtwet",
+        "noteContent":"帖子内容",
+        "noteType":2,
+        "noteAddress":"发帖位置",
+        "noteTime":"72727",
+        "notePraise":"12",
+        "comment":[{
+            "userImgNumber":"wegewgweg",
+            "userNickname":"用户昵称",
+            "commentNumber":2,
+            "commentContent":"评论内容",
+            "commentTime":"7272",
+            "commentPraise":"12"
+    },{
+            "userImgNumber":"wegwgw",
+            "userNickname":"用户昵称",
+            "commentNumber":2,
+            "commentContent":"评论内容",
+            "commentTime":"72727",
+            "commentPraise":"23"
+    },{
+            "userImgNumber":"wgewgweg",
+            "userNickname":"用户昵称",
+            "commentNumber":2,
+            "commentContent":"评论内容",
+            "commentTime":"232",
+            "commentPraise":"234"
+    }]
+}

@@ -28,6 +28,7 @@ import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,8 +48,9 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
     private SelectPopupWindow mPopupWindow;
     private List<String> showType = new ArrayList<>();
     private HomeAdapter homeAdapter;
-    private List<String> listItem;
+    private List<PostListBean.NoteBean> listItem;
     private PostListBean postListBean;
+    HashMap<String, String> mHashMap = new HashMap<>();
 
     @Override
     protected int getLayoutId() {
@@ -133,13 +135,29 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
     @Override
     public void onItemClick(View view, int position) {
         toActivity(MessagDetailActivity.class);
+        startActivity(new Intent(getActivity(),MessagDetailActivity.class).putExtra("noteId",listItem.get(position).noteId));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mHashMap.clear();
+        mHashMap.put("noteType","0");
+        mHashMap.put("use","0");
+        mHashMap.put("noteId","0");
+        NetControl.GetPostList(postListCallback,mHashMap);
+    }
 
     NetControl.GetResultListenerCallback postListCallback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
-            postListBean=(PostListBean)o;
+            if(null!=o){
+                postListBean=(PostListBean)o;
+                if(postListBean.getNote().size()>0){
+                    listItem.addAll(postListBean.getNote());
+                    homeAdapter.notifyDataSetChanged();
+                }
+            }
 
         }
 

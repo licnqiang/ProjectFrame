@@ -21,7 +21,7 @@ public class GlideImageLoader implements ImageLoader {
 
     @Override
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
-            Glide.with(activity.getApplicationContext())                             //配置上下文
+            Glide.with(activity)                             //配置上下文
                     .load(path)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .error(R.mipmap.collect_mrtp)           //设置错误图片
                     .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
@@ -38,12 +38,12 @@ public class GlideImageLoader implements ImageLoader {
             return;
         }
         if (isHttpUrl(path)) {
-            Glide.with(activity.getApplicationContext())                             //配置上下文
+            Glide.with(activity)                             //配置上下文
                     .load(path)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                     .into(imageView);
         } else {
-            Glide.with(activity.getApplicationContext())                             //配置上下文
+            Glide.with(activity)                             //配置上下文
                     .load(Uri.fromFile(new File(path)))      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                     .into(imageView);

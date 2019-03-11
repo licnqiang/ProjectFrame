@@ -9,4 +9,5 @@ package com.example.administrator.laundry.NetService.data;
 
 public class Login extends BaseReseponseInfo {
     public String token;
+
 }

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.administrator.laundry.NetService.data.PostListBean;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.adapter.HomeAdapter;
 import com.example.administrator.laundry.base.BaseActivity;
@@ -23,7 +24,7 @@ public class MyMessageActivity extends BaseActivity implements HomeAdapter.OnRec
     @BindView(R.id.tv_title)
     TextView tvTitle;
     private HomeAdapter homeAdapter;
-    private List<String> listItem;
+    private List<PostListBean.NoteBean> listItem;
 
     @Override
     protected int getLayoutId() {

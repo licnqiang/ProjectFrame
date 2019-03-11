@@ -1,0 +1,12 @@
+{
+    "code": "200",
+    "msg": "请求成功",
+    "userImgNumber":"头像编号",
+     "userPhone":"18845678888",
+     "userSign":"个人签名",
+     "userIntroduce":"个人简介",
+     "userSex":1,
+     "userWorkingTime":"235325",
+     "userShop":"店铺名称",
+     "userShopAddress":"店铺位置"
+}

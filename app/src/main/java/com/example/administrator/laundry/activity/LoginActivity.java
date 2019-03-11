@@ -168,7 +168,9 @@ public class LoginActivity extends BaseActivity {
             //保存token
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, o.toString());
             //登录环信
-            login();
+//            login();
+            toActivity(MainActivity.class);
+            finish();
         }
 
         @Override

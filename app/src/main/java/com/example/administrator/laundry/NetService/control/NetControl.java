@@ -5,6 +5,7 @@ import com.example.administrator.laundry.NetService.parser.ForgetPswParser;
 import com.example.administrator.laundry.NetService.parser.LoginParser;
 import com.example.administrator.laundry.NetService.parser.PostListParser;
 import com.example.administrator.laundry.NetService.parser.RegisterParser;
+import com.example.administrator.laundry.NetService.parser.listDetailParser;
 
 import java.util.HashMap;
 
@@ -83,6 +84,15 @@ public class NetControl {
                                    final HashMap<String, String> mHashMap) {
 
         PostListParser mParser = new PostListParser(listener, mHashMap);
+        mParser.start();
+    }
+    /**
+     * 获取帖子详情
+     */
+    public static void getDetail(final GetResultListenerCallback listener,
+                                   final HashMap<String, String> mHashMap) {
+
+        listDetailParser mParser = new listDetailParser(listener, mHashMap);
         mParser.start();
     }
 

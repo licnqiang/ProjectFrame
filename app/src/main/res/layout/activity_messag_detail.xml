@@ -59,18 +59,21 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="其他类"
                 android:textColor="@color/them_black_font" />
 
             <TextView
+                android:id="@+id/local"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="航天中路寰宇大厦"
                 android:textColor="@color/them_black_font" />
 
             <TextView
+                android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2019/1/26 16:09"

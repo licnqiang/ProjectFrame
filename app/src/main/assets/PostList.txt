@@ -5,21 +5,21 @@
         {
             "noteContent": "帖子内容",
             "noteId": 1,
-            "noteTime": "时间戳",
+            "noteTime": "72727",
             "userImgNumber": "用户头像编号",
             "userNickname": "用户昵称"
         },
         {
             "noteContent": "帖子内容",
             "noteId": 1,
-            "noteTime": "时间戳",
+            "noteTime": "727272",
             "userImgNumber": "用户头像编号",
             "userNickname": "用户昵称"
         },
         {
             "noteContent": "帖子内容",
             "noteId": 1,
-            "noteTime": "时间戳",
+            "noteTime": "72727",
             "userImgNumber": "用户头像编号",
             "userNickname": "用户昵称"
         }

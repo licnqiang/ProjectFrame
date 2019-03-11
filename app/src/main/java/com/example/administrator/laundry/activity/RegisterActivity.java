@@ -17,6 +17,7 @@ import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
+import com.example.administrator.laundry.UpLoadFile.upLoadFile;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.base.BaseApplication;
 import com.example.administrator.laundry.util.GlideImageLoader;
@@ -74,6 +75,7 @@ public class RegisterActivity extends BaseActivity {
     public static final int REQUEST_CODE_SELECT = 100;
     private LSProgressDialog progressDialog;
     private ArrayList<ImageItem> images;
+    private String nimageNumber;
 
     @Override
     protected int getLayoutId() {
@@ -240,12 +242,26 @@ public class RegisterActivity extends BaseActivity {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null) {
                     ImagePicker.getInstance().getImageLoader().displayImage(this, images.get(0).path, userImage, 0, 0);
+                    List<String>paths=new ArrayList<>();
+                    paths.add(images.get(0).path);
+                    upLoadFile.uploadFile(paths, new upLoadFile.ResultCallBack() {
+                        @Override
+                        public void succeed(String str) {
+                            nimageNumber=str;
+                            ToastUtil.show(RegisterActivity.this, "文件上传成功");
+                        }
+
+                        @Override
+                        public void faild() {
+                            ToastUtil.show(RegisterActivity.this, "文件上传失败");
+                        }
+                    });
                 }
             }
         }
     }
 
-    @OnClick({R.id.img_back, R.id.user_image, R.id.et_user_sex, R.id.btn_register, R.id.et_user_yzm})
+    @OnClick({R.id.img_back, R.id.user_image, R.id.et_user_sex, R.id.btn_register, R.id.send_yzm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -262,7 +278,7 @@ public class RegisterActivity extends BaseActivity {
                 meServerRister();
                 finish();
                 break;
-            case R.id.et_user_yzm:
+            case R.id.send_yzm:
                 sendYzm();
                 break;
         }
@@ -341,7 +357,7 @@ public class RegisterActivity extends BaseActivity {
             mHashMap.put("proof", userCode);
             mHashMap.put("userPassword", userLoginPsw);
             mHashMap.put("userNickname", userName);
-            mHashMap.put("userImgNumber", "头像编号");
+            mHashMap.put("userImgNumber", nimageNumber);
             mHashMap.put("userSign", userSign);
             mHashMap.put("userIntroduce", userCentent);
             mHashMap.put("userSex", userSex);

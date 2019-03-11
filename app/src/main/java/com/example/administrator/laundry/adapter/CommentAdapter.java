@@ -6,11 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.administrator.laundry.NetService.data.Detail;
 import com.example.administrator.laundry.R;
+import com.example.administrator.laundry.util.DateUtils;
 import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -18,7 +26,7 @@ import java.util.List;
  */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.SelectedPicViewHolder> {
     private Context mContext;
-    private List<ImageItem> mData;
+    private List<Detail.Comment> mData;
     private LayoutInflater mInflater;
     private OnRecyclerViewItemClickListener listener;
 
@@ -31,8 +39,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
     }
 
 
-    public CommentAdapter(Context mContext) {
+    public CommentAdapter(Context mContext,List<Detail.Comment> mData) {
         this.mContext = mContext;
+        this.mData = mData;
         this.mInflater = LayoutInflater.from(mContext);
     }
 
@@ -48,30 +57,43 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
 
     @Override
     public int getItemCount() {
-        return 7;
+        return mData.size();
     }
 
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private ImageView iv_img;
         private int clickPosition;
+        @BindView(R.id.iv_img)
+        ImageView ivImg;
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.content)
+        TextView content;
+        @BindView(R.id.time)
+        TextView time;
+        @BindView(R.id.btn_like_num)
+        TextView btnLikeNum;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
-            iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
+            ButterKnife.bind(this, itemView);
         }
 
         public void bind(int position) {
             //设置条目的点击事件
             itemView.setOnClickListener(this);
+            Detail.Comment  comment=mData.get(position);
             //根据条目位置设置图片
-//            String item = "";
-//            Glide.with(mContext)                             //配置上下文
-//                    .load("")      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
-//                    .error(R.mipmap.collect_mrtp)           //设置错误图片
-//                    .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
-//                    .into(iv_img);
+            Glide.with(mContext)                             //配置上下文
+                    .load(comment.userImgNumber)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
+                    .error(R.mipmap.collect_mrtp)           //设置错误图片
+                    .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
+                    .into(ivImg);
+
+            tvName.setText(comment.userNickname);
+            content.setText(comment.commentContent);
+            time.setText(DateUtils.stampToDate(comment.commentTime));
+            btnLikeNum.setText(comment.commentPraise);
             clickPosition = position;
         }
 

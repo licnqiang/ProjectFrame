@@ -1,10 +1,8 @@
 package com.example.administrator.laundry.activity;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.view.Window;
-
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.view.LoadDataView;
