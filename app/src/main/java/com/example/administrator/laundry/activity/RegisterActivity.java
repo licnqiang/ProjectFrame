@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.UpLoadFile.upLoadFile;
@@ -364,6 +365,7 @@ public class RegisterActivity extends BaseActivity {
             mHashMap.put("userWworkingTime", userTime);
             mHashMap.put("userShop", userStoreName);
             mHashMap.put("userShopAddress", userStoreLocation);
+            LoadingUI.showDialogForLoading(this,"正在加载",true);
             NetControl.Register(regiserCallBack, mHashMap);
         }
 
@@ -372,6 +374,7 @@ public class RegisterActivity extends BaseActivity {
     NetControl.GetResultListenerCallback regiserCallBack = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            LoadingUI.hideDialogForLoading();
             BaseReseponseInfo info = (BaseReseponseInfo) o;
             if (null != info && null != info.getInfo()) {
                 Toast.makeText(

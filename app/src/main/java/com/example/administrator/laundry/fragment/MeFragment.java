@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.administrator.laundry.R;
+import com.example.administrator.laundry.activity.DatalibraryActivity;
 import com.example.administrator.laundry.activity.MyCollectActivity;
 import com.example.administrator.laundry.activity.MyMessageActivity;
 import com.example.administrator.laundry.activity.SetActivity;
@@ -27,7 +28,6 @@ public class MeFragment extends BaseFragment {
     CircleImageview imgHeadPortrait;
     @BindView(R.id.img_head_sex)
     ImageView imgHeadSex;
-    Unbinder unbinder;
 
     @Override
     protected int getLayoutId() {
@@ -45,7 +45,7 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.img_head_portrait, R.id.ll_self_favorite, R.id.ll_lx_map, R.id.ll_no_upload})
+    @OnClick({R.id.img_head_portrait, R.id.ll_self_favorite, R.id.ll_lx_map, R.id.ll_no_upload,R.id.file_map})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_head_portrait:
@@ -59,6 +59,9 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.ll_no_upload:
                 toActivity(SetActivity.class);
+                break;
+            case R.id.file_map:
+                toActivity(DatalibraryActivity.class);
                 break;
         }
     }

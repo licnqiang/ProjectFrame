@@ -19,7 +19,7 @@ public class ForgetPswParser extends BaseParser {
 
     private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/setMyInfo";
+    private String url = "/setUserPwd";
 
 
     private NetControl.GetResultListenerCallback listener;
@@ -29,9 +29,9 @@ public class ForgetPswParser extends BaseParser {
 
         this.listener = listener;
 
-        setTest(true);
-
-        setTestFileName("Common.txt");
+//        setTest(true);
+//
+//        setTestFileName("Common.txt");
 
         setParameters(mHashMap);
 

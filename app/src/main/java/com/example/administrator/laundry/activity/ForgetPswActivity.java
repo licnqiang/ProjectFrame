@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
@@ -51,7 +52,6 @@ public class ForgetPswActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        tvTitle.setText("个人详情");
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ForgetPswActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.img_back, R.id.btn_forgetPsw, R.id.et_user_yzm})
+    @OnClick({R.id.img_back, R.id.btn_forgetPsw, R.id.send_yzm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -73,7 +73,7 @@ public class ForgetPswActivity extends BaseActivity {
             case R.id.btn_forgetPsw:
                 judgeData();
                 break;
-            case R.id.et_user_yzm:
+            case R.id.send_yzm:
                 String etUserPhone = etUserName.getText().toString();
                 if (TextUtils.isEmpty(etUserPhone)) {
                     ToastUtil.show(this, "请输入手机号");
@@ -104,6 +104,7 @@ public class ForgetPswActivity extends BaseActivity {
             mHashMap.put("userPhone", userName);
             mHashMap.put("proof", userYzm);
             mHashMap.put("userPassword", userNextPsw);
+            LoadingUI.showDialogForLoading(this,"正在加载",true);
             NetControl.ForgetPsw(registerCallback, mHashMap);
         }
     }
@@ -111,7 +112,8 @@ public class ForgetPswActivity extends BaseActivity {
     NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
-
+            LoadingUI.hideDialogForLoading();
+            ToastUtil.show(ForgetPswActivity.this,"验证码获取成功");
         }
 
         @Override

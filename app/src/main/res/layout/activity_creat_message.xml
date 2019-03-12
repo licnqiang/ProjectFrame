@@ -30,6 +30,7 @@
                     android:textColor="@color/them_black_font" />
 
                 <EditText
+                    android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="@color/gray5" />
@@ -68,6 +69,7 @@
                     android:textColor="@color/them_black_font" />
 
                 <EditText
+                    android:id="@+id/store_local"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/gray5" />

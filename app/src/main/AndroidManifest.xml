@@ -105,6 +105,7 @@
         <activity android:name=".activity.FriendInfoActivity"></activity>
         <activity android:name=".activity.MyMessageActivity"></activity>
         <activity android:name=".activity.MyInfoActivity"></activity>
+        <activity android:name=".activity.DatalibraryActivity"></activity>
 
 </application>
 </manifest>

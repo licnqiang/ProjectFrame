@@ -29,12 +29,12 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:background="@null"
                 android:gravity="center"
                 android:paddingLeft="10dp"
-                android:background="@null"
                 android:text="爬坡的拖拉机"
-                android:textSize="16sp"
-                android:textColor="@color/them_black_font" />
+                android:textColor="@color/them_black_font"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -65,13 +65,13 @@
 
             <TextView
                 style="@style/common_liner_lefttv_style"
-                android:text="生日" />
+                android:text="从业时间" />
 
             <EditText
                 android:id="@+id/user_age"
                 style="@style/user_info_edit_style"
                 android:digits="1234567890"
-                android:hint="2012/12/5"
+                android:hint="2012"
                 android:inputType="number"
                 android:singleLine="true" />
 
@@ -86,21 +86,16 @@
 
             <TextView
                 style="@style/common_liner_lefttv_style"
-                android:text="联系方式" />
+                android:text="店铺位置" />
 
             <EditText
-                android:id="@+id/user_phone"
+                android:id="@+id/user_address"
                 style="@style/user_info_edit_style"
-                android:layout_alignParentTop="true"
-                android:textSize="16sp"
-                android:digits="1234567890-"
-                android:hint="18591053757" />
-
+                android:hint="西安市未央区凤城八路"
+                android:textSize="16sp" />
         </RelativeLayout>
 
-
         <TextView style="@style/user_view_right_line_style" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -108,13 +103,55 @@
 
             <TextView
                 style="@style/common_liner_lefttv_style"
-                android:text="家庭住址" />
+                android:text="店铺名称" />
 
             <EditText
-                android:id="@+id/user_address"
+                android:id="@+id/store_name"
                 style="@style/user_info_edit_style"
-                android:textSize="16sp"
-                android:hint="西安市未央区凤城八路" />
+                android:layout_alignParentTop="true"
+                android:digits="1234567890-"
+                android:hint="18591053757"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+
+        <TextView style="@style/user_view_right_line_style" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                style="@style/common_liner_lefttv_style"
+                android:text="个人简介" />
+
+            <EditText
+                android:id="@+id/user_content"
+                style="@style/user_info_edit_style"
+                android:layout_alignParentTop="true"
+                android:digits="1234567890-"
+                android:hint="18591053757"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                style="@style/common_liner_lefttv_style"
+                android:text="个人签名" />
+
+            <EditText
+                android:id="@+id/user_sigin"
+                style="@style/user_info_edit_style"
+                android:layout_alignParentTop="true"
+                android:digits="1234567890-"
+                android:hint="18591053757"
+                android:textSize="16sp" />
+
         </RelativeLayout>
     </LinearLayout>
 

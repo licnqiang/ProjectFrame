@@ -1,6 +1,7 @@
 package com.example.administrator.laundry.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -9,9 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.laundry.NetService.control.NetControl;
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.data.UserInfo;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.util.GlideImageLoader;
+import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.example.administrator.laundry.view.SelectDialog;
 import com.lzy.imagepicker.ImagePicker;
@@ -19,9 +24,11 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MyInfoActivity extends BaseActivity {
@@ -31,19 +38,24 @@ public class MyInfoActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.user_image)
     ImageView userImage;
-    @BindView(R.id.user_name)
-    EditText userName;
-    @BindView(R.id.user_sex)
-    TextView userSex;
-    @BindView(R.id.user_age)
-    EditText userAge;
-    @BindView(R.id.user_phone)
-    EditText userPhone;
-    @BindView(R.id.user_address)
-    EditText userAddress;
     @BindView(R.id.btn_send_message)
     Button btnSendMessage;
+    @BindView(R.id.user_name)
+    EditText userName;
+    @BindView(R.id.user_age)
+    EditText userAge;
+    @BindView(R.id.user_address)
+    EditText userAddress;
+    @BindView(R.id.store_name)
+    EditText storeName;
+    @BindView(R.id.user_content)
+    EditText userContent;
+    @BindView(R.id.user_sigin)
+    EditText userSigin;
+    @BindView(R.id.user_sex)
+    TextView userSex;
     private ArrayList<ImageItem> images;
+    HashMap<String, String> mHashMap = new HashMap<>();
 
     @Override
     protected int getLayoutId() {
@@ -76,7 +88,7 @@ public class MyInfoActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.img_back, R.id.user_image, R.id.user_name, R.id.user_sex, R.id.user_age, R.id.user_phone, R.id.user_address, R.id.btn_send_message})
+    @OnClick({R.id.img_back, R.id.user_image, R.id.user_name, R.id.user_sex, R.id.user_age, R.id.user_address, R.id.btn_send_message})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -92,14 +104,32 @@ public class MyInfoActivity extends BaseActivity {
                 break;
             case R.id.user_age:
                 break;
-            case R.id.user_phone:
-                break;
             case R.id.user_address:
                 break;
             case R.id.btn_send_message:
-                finish();
+                sendInfo();
                 break;
         }
+    }
+
+    private void sendInfo() {
+        String name = userName.getText().toString();
+        String sex = userSex.getText().toString();
+        String age = userAge.getText().toString();
+        String address = userAddress.getText().toString();
+        String storename = storeName.getText().toString();
+        String content = userContent.getText().toString();
+        String sigin = userSigin.getText().toString();
+        mHashMap.clear();
+        mHashMap.put("userImgNumber", "");
+        mHashMap.put("userIntroduce", content);
+        mHashMap.put("userNickname", name);
+        mHashMap.put("userSex", (sex.equals("男") ? 1 : 2) + "");
+        mHashMap.put("userShopAddress", address);
+        mHashMap.put("userSign", sigin);
+        mHashMap.put("userWworkingTime", age);
+        mHashMap.put("userShop", storename);
+        NetControl.saveUserInfo(callback, mHashMap);
     }
 
 
@@ -186,4 +216,70 @@ public class MyInfoActivity extends BaseActivity {
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHashMap.clear();
+        NetControl.getUserInfo(infoCallback,mHashMap);
+    }
+
+    /**
+     * 修改个人信息
+     */
+    NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            ToastUtil.show(MyInfoActivity.this, "个人信息修改成功");
+            finish();
+        }
+
+        @Override
+        public void onErro(Object o) {
+            BaseReseponseInfo baseReseponseInfo = (BaseReseponseInfo) o;
+            if (null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
+                ToastUtil.show(MyInfoActivity.this, baseReseponseInfo.getInfo());
+            } else {
+                ToastUtil.show(MyInfoActivity.this, "个人信息修改失败");
+            }
+        }
+    };
+
+
+    /**
+     * 个人信息
+     */
+    NetControl.GetResultListenerCallback infoCallback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            if (null != o) {
+                UserInfo userInfo = (UserInfo) o;
+
+
+                userName.setText(userInfo.userNickname);
+                if (userInfo.userSex == 1) {
+                    userSex.setText("男");
+                } else {
+                    userSex.setText("女");
+                }
+                userAge.setText(userInfo.userWworkingTime);
+                userAddress.setText(userInfo.userShopAddress);
+                storeName.setText(userInfo.userShop);
+                userContent.setText(userInfo.userIntroduce);
+                userSigin.setText(userInfo.userSign);
+
+            }
+        }
+
+        @Override
+        public void onErro(Object o) {
+            BaseReseponseInfo baseReseponseInfo = (BaseReseponseInfo) o;
+            if (null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
+                ToastUtil.show(MyInfoActivity.this, baseReseponseInfo.getInfo());
+            } else {
+                ToastUtil.show(MyInfoActivity.this, "个人信息修改失败");
+            }
+        }
+    };
+
 }

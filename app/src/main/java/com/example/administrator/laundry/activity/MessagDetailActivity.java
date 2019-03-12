@@ -178,7 +178,7 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
 
     @Override
     public void onItemClick(View view, int position) {
-        startActivity(new Intent(MessagDetailActivity.this,FriendInfoActivity.class).putExtra("id",id));
+        startActivity(new Intent(MessagDetailActivity.this, FriendInfoActivity.class).putExtra("id", id));
     }
 
     public void getData() {
@@ -192,10 +192,10 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
         public void onFinished(Object o) {
             if (null != o) {
                 detail = (Detail) o;
-                id=detail.noteId+"";
-                 type.setText(detail.noteType+"");
-                 local.setText(detail.noteAddress);
-                 time.setText(DateUtils.stampToDate(detail.noteTime));
+                id = detail.noteId + "";
+                type.setText(detail.noteType + "");
+                local.setText(detail.noteAddress);
+                time.setText(DateUtils.stampToDate(detail.noteTime));
                 Glide.with(MessagDetailActivity.this)                             //配置上下文
                         .load(detail.userImgNumber)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
                         .error(R.mipmap.collect_mrtp)           //设置错误图片

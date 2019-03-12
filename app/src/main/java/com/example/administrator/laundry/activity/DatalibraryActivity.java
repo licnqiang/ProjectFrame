@@ -1,32 +1,24 @@
-package com.example.administrator.laundry.fragment;
+package com.example.administrator.laundry.activity;
 
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.data.PostListBean;
+import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
-import com.example.administrator.laundry.activity.CreatMessageActivity;
-import com.example.administrator.laundry.activity.ForgetPswActivity;
-import com.example.administrator.laundry.activity.LoginActivity;
-import com.example.administrator.laundry.activity.MessagDetailActivity;
-import com.example.administrator.laundry.activity.SearchActivity;
 import com.example.administrator.laundry.adapter.HomeAdapter;
+import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.base.BaseApplication;
-import com.example.administrator.laundry.base.BaseFragment;
-import com.example.administrator.laundry.util.ToastUtil;
-import com.example.administrator.laundry.view.SelectPopupWindow;
+import com.example.administrator.laundry.view.LoadDataView;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,51 +26,44 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerViewItemClickListener {
-    private static PopupWindow projectSelectLayer;
-    @BindView(R.id.home_preject)
-    TextView homePreject;
-    @BindView(R.id.home_search)
-    ImageView homeSearch;
+public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnRecyclerViewItemClickListener{
     @BindView(R.id.list)
     PullLoadMoreRecyclerView pullLoadMoreRecyclerView;
-    private SelectPopupWindow mPopupWindow;
-    private List<String> showType = new ArrayList<>();
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     private HomeAdapter homeAdapter;
     private List<PostListBean.NoteBean> listItem;
-    private PostListBean postListBean;
     HashMap<String, String> mHashMap = new HashMap<>();
+    private PostListBean postListBean;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_map;
+        return R.layout.activity_my_collect;
     }
 
     @Override
     protected void initView() {
-    }
-
-    private void setData() {
-        showType.add("全部");
-        showType.add("求助站");
-        showType.add("转让");
-        showType.add("招聘");
-        showType.add("其他");
+        tvTitle.setText("资料库");
     }
 
     @Override
     protected void initData() {
-        setData();
         setAdapter();
-        homePreject.setText(showType.get(0));
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
     }
 
     private void setAdapter() {
         listItem = new ArrayList<>();
-        homeAdapter = new HomeAdapter(getActivity(), listItem);
+        homeAdapter = new HomeAdapter(this, listItem);
         homeAdapter.setOnItemClickListener(this);
         pullLoadMoreRecyclerView.setLinearLayout();
         pullLoadMoreRecyclerView.setPullRefreshEnable(false);
@@ -86,45 +71,22 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
         pullLoadMoreRecyclerView.setAdapter(homeAdapter);
     }
 
-
-    @OnClick({R.id.home_menu, R.id.home_preject, R.id.home_search, R.id.home_iv_photo})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            /*主菜单*/
-            case R.id.home_menu:
-                ToastUtil.show(getActivity(), getString(R.string.ing_code));
-                break;
-            /*项目选择*/
-            case R.id.home_preject:
-                if (mPopupWindow == null) {
-                    mPopupWindow = new SelectPopupWindow(getActivity(), selectCategory, showType);
-                }
-                mPopupWindow.showAsDropDown(homePreject, -5, 10);
-                break;
-            /*搜索*/
-            case R.id.home_search:
-                toActivity(SearchActivity.class);
-                break;
-            /*拍照*/
-            case R.id.home_iv_photo:
-                toActivity(CreatMessageActivity.class);
-                break;
-            default:
-                break;
-        }
+    @OnClick(R.id.img_back)
+    public void onViewClicked() {
+        finish();
     }
 
-    /**
-     * 选择完成回调接口
-     */
-    private SelectPopupWindow.SelectCategory selectCategory = new SelectPopupWindow.SelectCategory() {
-        @Override
-        public void selectCategory(int position) {
-            if (null != showType && showType.size() > 0) {
-                homePreject.setText(showType.get(position));
-            }
-        }
-    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHashMap.clear();
+        mHashMap.put("noteType","0");
+        mHashMap.put("use","3");
+        mHashMap.put("noteId","0");
+        LoadingUI.showDialogForLoading(this,"正在加载",true);
+        NetControl.GetPostList(postListCallback,mHashMap);
+    }
 
     /**
      * 点击条目
@@ -134,22 +96,15 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
      */
     @Override
     public void onItemClick(View view, int position) {
-        startActivity(new Intent(getActivity(),MessagDetailActivity.class).putExtra("noteId",listItem.get(position).noteId));
+        startActivity(new Intent(DatalibraryActivity.this,MessagDetailActivity.class).putExtra("noteId",listItem.get(position).noteId));
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mHashMap.clear();
-        mHashMap.put("noteType","0");
-        mHashMap.put("use","0");
-        mHashMap.put("noteId","0");
-        NetControl.GetPostList(postListCallback,mHashMap);
-    }
 
     NetControl.GetResultListenerCallback postListCallback = new NetControl.GetResultListenerCallback() {
+
         @Override
         public void onFinished(Object o) {
+            LoadingUI.hideDialogForLoading();
             if(null!=o){
                 postListBean=(PostListBean)o;
                 if(postListBean.getNote().size()>0){
@@ -175,10 +130,10 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
                                     BaseApplication.ApplicationContext,
                                     "登录失效，请重新登录！", Toast.LENGTH_SHORT)
                                     .show();
-                            startActivity(new Intent(getActivity(),
+                            startActivity(new Intent(DatalibraryActivity.this,
                                     LoginActivity.class).putExtra("flag",
                                     false));
-                            getActivity().finish();
+                            finish();
                             break;
                         default:
                             Toast.makeText(
@@ -189,7 +144,7 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
                     }
                 }
             } else {
-                Toast.makeText(getActivity(),
+                Toast.makeText(DatalibraryActivity.this,
                         "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
             }
         }

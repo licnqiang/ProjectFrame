@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.constant.SysContant;
@@ -76,6 +77,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     mHashMap.put("userPhone", userName);
                     mHashMap.put("userPassword", userPsw);
+                    LoadingUI.showDialogForLoading(this,"正在登录",true);
                     NetControl.Login(callback, mHashMap);
                 }
 //                toActivity(MainActivity.class);
@@ -165,6 +167,7 @@ public class LoginActivity extends BaseActivity {
     NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            LoadingUI.hideDialogForLoading();
             //保存token
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, o.toString());
             //登录环信

@@ -141,6 +141,34 @@
             android:background="@color/gray5" />
 
         <LinearLayout
+            android:id="@+id/file_map"
+            style="@style/user_manager_linear_layout">
+
+            <ImageView
+                style="@style/list_left_img"
+                android:background="@mipmap/map_cj_sel" />
+
+            <TextView
+                style="@style/list_text"
+                android:text="资料库" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                style="@style/list_right_img"
+                android:background="@mipmap/self_open_jump" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray5" />
+
+        <LinearLayout
             android:id="@+id/ll_no_upload"
             style="@style/user_manager_linear_layout">
 

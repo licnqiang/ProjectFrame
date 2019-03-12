@@ -12,12 +12,12 @@ public class UrlConfig {
     /**
      * 测试服务器
      */
-    private final static String U2 = "http://192.168.11.244:8080";
+    private final static String U2 = "http://192.168.0.103/dl_laundry";
 
     /**
      * 正式
      */
-    private final static String U1 = "http://47.93.43.231/";
+    private final static String U1 = "http://192.168.0.103/dl_laundry";
 
     /**
      * 测试版本下 正式测试服务器地址切换用

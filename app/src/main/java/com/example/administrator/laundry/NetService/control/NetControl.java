@@ -1,10 +1,14 @@
 package com.example.administrator.laundry.NetService.control;
 
+import com.example.administrator.laundry.NetService.parser.ChangePswParser;
 import com.example.administrator.laundry.NetService.parser.CodeParser;
+import com.example.administrator.laundry.NetService.parser.CreatMessageParser;
 import com.example.administrator.laundry.NetService.parser.ForgetPswParser;
 import com.example.administrator.laundry.NetService.parser.LoginParser;
 import com.example.administrator.laundry.NetService.parser.PostListParser;
 import com.example.administrator.laundry.NetService.parser.RegisterParser;
+import com.example.administrator.laundry.NetService.parser.UserInfoParser;
+import com.example.administrator.laundry.NetService.parser.UserInfoSaveParser;
 import com.example.administrator.laundry.NetService.parser.listDetailParser;
 
 import java.util.HashMap;
@@ -93,6 +97,47 @@ public class NetControl {
                                    final HashMap<String, String> mHashMap) {
 
         listDetailParser mParser = new listDetailParser(listener, mHashMap);
+        mParser.start();
+    }
+
+    /**
+     * 修改个人信息
+     */
+    public static void saveUserInfo(final GetResultListenerCallback listener,
+                                 final HashMap<String, String> mHashMap) {
+
+        UserInfoSaveParser mParser = new UserInfoSaveParser(listener, mHashMap);
+        mParser.start();
+    }
+
+
+    /**
+     * 获取个人信息
+     */
+    public static void getUserInfo(final GetResultListenerCallback listener,
+                                    final HashMap<String, String> mHashMap) {
+
+        UserInfoParser mParser = new UserInfoParser(listener, mHashMap);
+        mParser.start();
+    }
+
+    /**
+     * 修改密码
+     */
+    public static void changpsw(final GetResultListenerCallback listener,
+                                   final HashMap<String, String> mHashMap) {
+
+        ChangePswParser mParser = new ChangePswParser(listener, mHashMap);
+        mParser.start();
+    }
+
+    /**
+     * 修改密码
+     */
+    public static void CreatMessage(final GetResultListenerCallback listener,
+                                final HashMap<String, String> mHashMap) {
+
+        CreatMessageParser mParser = new CreatMessageParser(listener, mHashMap);
         mParser.start();
     }
 

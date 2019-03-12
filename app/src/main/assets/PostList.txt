@@ -3,25 +3,25 @@
     "msg": "请求成功",
     "note": [
         {
-            "noteContent": "帖子内容",
+            "noteContent": "我现在就在这里洗衣服",
             "noteId": 1,
             "noteTime": "72727",
-            "userImgNumber": "用户头像编号",
-            "userNickname": "用户昵称"
+            "userImgNumber": "wegwegwg",
+            "userNickname": "小众明耀"
         },
         {
-            "noteContent": "帖子内容",
+            "noteContent": "感觉还不错",
             "noteId": 1,
             "noteTime": "727272",
-            "userImgNumber": "用户头像编号",
-            "userNickname": "用户昵称"
+            "userImgNumber": "wefewfw",
+            "userNickname": "嗯嗯"
         },
         {
             "noteContent": "帖子内容",
             "noteId": 1,
             "noteTime": "72727",
-            "userImgNumber": "用户头像编号",
-            "userNickname": "用户昵称"
+            "userImgNumber": "wegwegwge",
+            "userNickname": "我就想试试名字有多长"
         }
     ]
 }
