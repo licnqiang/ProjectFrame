@@ -20,6 +20,7 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
 
 dependencies {
@@ -51,5 +52,4 @@ dependencies {
     //图片选择
     implementation 'com.lzy.widget:imagepicker:0.6.1'
     implementation project(':easeui')
-    implementation files('libs/md5.jar')
 }

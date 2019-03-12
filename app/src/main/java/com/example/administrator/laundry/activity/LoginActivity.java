@@ -4,12 +4,15 @@ package com.example.administrator.laundry.activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.util.LoadingUI;
+import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.base.BaseApplication;
 import com.example.administrator.laundry.constant.SysContant;
 import com.example.administrator.laundry.util.SpHelper;
 import com.example.administrator.laundry.util.ToastUtil;
@@ -178,11 +181,21 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void onErro(Object o) {
-            BaseReseponseInfo baseReseponseInfo = (BaseReseponseInfo) o;
-            if (null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
-                ToastUtil.show(LoginActivity.this, baseReseponseInfo.getInfo());
+            if (o != null) {
+                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+                int code = mBaseReseponseInfo.getFlag();
+                String msg = mBaseReseponseInfo.getInfo();
+                if (msg != null && msg.length() > 0) {
+                    Log.e("TAG-code", code + "");
+                    Log.e("TAG-msg", msg);
+                    Toast.makeText(
+                            BaseApplication.ApplicationContext,
+                            msg + " code:" + code,
+                            Toast.LENGTH_SHORT).show();
+                }
             } else {
-                ToastUtil.show(LoginActivity.this, "用户名/密码错误");
+                Toast.makeText(LoginActivity.this,
+                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
             }
         }
     };

@@ -171,14 +171,14 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
                 showDialog();
                 break;
             case R.id.user_image:
-                toActivity(FriendInfoActivity.class);
+                startActivity(new Intent(MessagDetailActivity.this, FriendInfoActivity.class).putExtra("id", detail.userId));
                 break;
         }
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        startActivity(new Intent(MessagDetailActivity.this, FriendInfoActivity.class).putExtra("id", id));
+        startActivity(new Intent(MessagDetailActivity.this, FriendInfoActivity.class).putExtra("id", detail.comment.get(position).userId));
     }
 
     public void getData() {

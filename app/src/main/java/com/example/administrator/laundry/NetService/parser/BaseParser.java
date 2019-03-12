@@ -14,8 +14,8 @@ import com.example.administrator.laundry.NetService.http.HttpConnector;
 import com.example.administrator.laundry.NetService.http.UrlConfig;
 import com.example.administrator.laundry.NetService.util.FileUtil;
 import com.example.administrator.laundry.NetService.util.Log;
+import com.example.administrator.laundry.NetService.util.MD5Utils;
 import com.example.administrator.laundry.base.BaseApplication;
-import com.jjs.cashbus.util.MD5;
 
 /**
  * 基础解析类
@@ -157,7 +157,7 @@ public abstract class BaseParser<T extends BaseReseponseInfo> extends Thread {
 			String token = BaseApplication.token;
 			//String postData2=new String(postData).replace("\\", "");
 			//Log.e("postData2", postData2);
-			String check = MD5.EncoderByMd5(new String(postData));
+			String check = MD5Utils.MD5Encode(new String(postData),"UTF-8");
 //			Log.e("postData", new String(postData));
 			Log.e("check", check);
 			mHttpConnector.setRequestProperty("check", check);
