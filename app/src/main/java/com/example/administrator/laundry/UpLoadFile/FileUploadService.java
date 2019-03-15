@@ -19,6 +19,6 @@ public interface FileUploadService {
      * @return 状态信息
      */
     @Multipart
-    @POST("/upLoad")
+    @POST("/dl_laundry/upload")
     Call<BaseResponse> uploadFilesWithParts(@Part() List<MultipartBody.Part> parts);
 }

@@ -23,7 +23,7 @@ public class PostListParser extends BaseParser {
 
     private PostListBean mInfo;
 
-    private String url = "/getNoteALL";
+    private String url = "getNoteALL";
 
 
     private NetControl.GetResultListenerCallback listener;

@@ -18,6 +18,7 @@ import com.example.administrator.laundry.util.SpHelper;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.example.administrator.laundry.view.progress.LSProgressDialog;
+import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -181,6 +182,8 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void onErro(Object o) {
+            Log.e("-----------","-------------"+new Gson().toJson(o));
+            LoadingUI.hideDialogForLoading();
             if (o != null) {
                 BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
                 int code = mBaseReseponseInfo.getFlag();
@@ -195,7 +198,7 @@ public class LoginActivity extends BaseActivity {
                 }
             } else {
                 Toast.makeText(LoginActivity.this,
-                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+                        "用户不存在", Toast.LENGTH_SHORT).show();
             }
         }
     };

@@ -19,7 +19,7 @@ public class ChangePswParser extends BaseParser {
 
     private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/setUserPwd";
+    private String url = "setUserPwd";
 
 
     private NetControl.GetResultListenerCallback listener;
@@ -31,7 +31,7 @@ public class ChangePswParser extends BaseParser {
 
 //        setTest(true);
 //
-//        setTestFileName("Common.txt");
+        setTestFileName("Common.txt");
 
         setParameters(mHashMap);
 

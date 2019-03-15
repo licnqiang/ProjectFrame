@@ -22,7 +22,7 @@ public class UserInfoParser extends BaseParser {
 
     private UserInfo mInfo;
 
-    private String url = "/getMyInfo";
+    private String url = "getMyInfo";
 
 
     private NetControl.GetResultListenerCallback listener;

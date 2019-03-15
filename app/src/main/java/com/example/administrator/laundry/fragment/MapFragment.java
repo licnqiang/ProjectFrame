@@ -81,8 +81,20 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
         homeAdapter = new HomeAdapter(getActivity(), listItem);
         homeAdapter.setOnItemClickListener(this);
         pullLoadMoreRecyclerView.setLinearLayout();
-        pullLoadMoreRecyclerView.setPullRefreshEnable(false);
-        pullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        pullLoadMoreRecyclerView.setPullRefreshEnable(true);
+        pullLoadMoreRecyclerView.setPushRefreshEnable(true);
+        pullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
+            @Override
+            public void onRefresh() {
+
+
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
         pullLoadMoreRecyclerView.setAdapter(homeAdapter);
     }
 

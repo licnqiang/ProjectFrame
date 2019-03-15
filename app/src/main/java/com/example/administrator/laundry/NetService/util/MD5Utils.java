@@ -21,18 +21,25 @@ public class MD5Utils {
      * @return
      */
     public static String MD5Encode(String origin, String charsetname) {
-        String resultString = null;
+        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'a', 'b', 'c', 'd', 'e', 'f' };
         try {
-            resultString = new String(origin);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            if (null == charsetname || "".equals(charsetname)) {
-                resultString = byteArrayToHexString(md.digest(resultString.getBytes()));
-            } else {
-                resultString = byteArrayToHexString(md.digest(resultString.getBytes(charsetname)));
+            byte[] strTemp = origin.getBytes();
+            MessageDigest mdTemp = MessageDigest.getInstance("MD5");
+            mdTemp.update(strTemp);
+            byte[] md = mdTemp.digest();
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i < j; i++) {
+                byte byte0 = md[i];
+                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+                str[k++] = hexDigits[byte0 & 0xf];
             }
+            return new String(str);
         } catch (Exception e) {
+            return null;
         }
-        return resultString;
     }
 
 

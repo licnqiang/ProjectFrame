@@ -22,7 +22,7 @@ public class RegisterParser extends BaseParser {
 
     private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/userReg";
+    private String url = "userReg";
 
 
     private NetControl.GetResultListenerCallback listener;

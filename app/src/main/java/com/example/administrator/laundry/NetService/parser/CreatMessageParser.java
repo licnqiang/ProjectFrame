@@ -19,7 +19,7 @@ public class CreatMessageParser extends BaseParser {
 
     private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/issueNote";
+    private String url = "issueNote";
 
 
     private NetControl.GetResultListenerCallback listener;

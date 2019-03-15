@@ -19,7 +19,7 @@ public class UserInfoSaveParser extends BaseParser {
 
     private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/setMyInfo";
+    private String url = "setMyInfo";
 
 
     private NetControl.GetResultListenerCallback listener;

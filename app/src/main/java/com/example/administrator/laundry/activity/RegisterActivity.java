@@ -76,7 +76,7 @@ public class RegisterActivity extends BaseActivity {
     public static final int REQUEST_CODE_SELECT = 100;
     private LSProgressDialog progressDialog;
     private ArrayList<ImageItem> images;
-    private String nimageNumber;
+    private String nimageNumber="";
 
     @Override
     protected int getLayoutId() {
@@ -277,7 +277,6 @@ public class RegisterActivity extends BaseActivity {
             case R.id.btn_register:
 //                register();
                 meServerRister();
-                finish();
                 break;
             case R.id.send_yzm:
                 sendYzm();
@@ -355,17 +354,17 @@ public class RegisterActivity extends BaseActivity {
             ToastUtil.show(RegisterActivity.this, "请输入所有信息");
         } else {
             mHashMap.put("userPhone", userPhone);
-            mHashMap.put("proof", userCode);
+            mHashMap.put("proof",userCode);
             mHashMap.put("userPassword", userLoginPsw);
             mHashMap.put("userNickname", userName);
             mHashMap.put("userImgNumber", nimageNumber);
             mHashMap.put("userSign", userSign);
             mHashMap.put("userIntroduce", userCentent);
-            mHashMap.put("userSex", userSex);
-            mHashMap.put("userWworkingTime", userTime);
+            mHashMap.put("userSex",(userSex.equals("男")?0:1)+"");
+            mHashMap.put("userWorkingTime", userTime);
             mHashMap.put("userShop", userStoreName);
             mHashMap.put("userShopAddress", userStoreLocation);
-            LoadingUI.showDialogForLoading(this,"正在加载",true);
+            LoadingUI.showDialogForLoading(RegisterActivity.this,"正在加载",true);
             NetControl.Register(regiserCallBack, mHashMap);
         }
 
@@ -381,8 +380,8 @@ public class RegisterActivity extends BaseActivity {
                         BaseApplication.ApplicationContext,
                         info.getInfo(),
                         Toast.LENGTH_SHORT).show();
+                finish();
             }
-            finish();
         }
 
         @Override

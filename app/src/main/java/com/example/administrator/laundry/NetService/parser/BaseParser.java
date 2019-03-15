@@ -2,9 +2,12 @@ package com.example.administrator.laundry.NetService.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.Handler;
@@ -91,7 +94,12 @@ public abstract class BaseParser<T extends BaseReseponseInfo> extends Thread {
 	@Override
 	public void run() {
 
-		byte[] b = CreatPost();
+		byte[] b = new byte[0];
+		try {
+			b = CreatPost();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
 		String url = UrlConfig.URL_PREFIX + urlBody;
 		Log.e("http", "http--url==" + url);
@@ -219,37 +227,71 @@ public abstract class BaseParser<T extends BaseReseponseInfo> extends Thread {
 	// 获取数据失败
 	protected abstract void Error();
 
-	protected byte[] CreatPost() {
+//	protected byte[] CreatPost() {
+//		HashMap<String, Object> mMap = parameters;
+//
+//		String token = BaseApplication.token;
+//
+//		if (token != null && token.length() > 0) {
+//			mMap.put("token", token);
+//		}
+//		mMap.put("OS", BaseApplication.os);
+//		mMap.put("version", BaseApplication.version);
+//		Iterator iter = mMap.entrySet().iterator();
+//		JSONObject mObject = new JSONObject();
+//		while (iter.hasNext()) {
+//			Map.Entry entry = (Map.Entry) iter.next();
+//			String key = entry.getKey().toString();
+//			Object value = entry.getValue();
+//
+//			try {
+//				mObject.put(key, value);
+//			} catch (JSONException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		byte[] b = null;
+//		String s = mObject.toString();
+//		Log.e("http", "http请求参数==" + s);
+//		if (s != null && s.length() > 0) {
+//			b = s.getBytes();
+//		}
+//
+//		return b;
+//
+//	}
+
+
+	protected byte[] CreatPost() throws UnsupportedEncodingException {
 		HashMap<String, Object> mMap = parameters;
-
 		String token = BaseApplication.token;
-
 		if (token != null && token.length() > 0) {
 			mMap.put("token", token);
 		}
 		mMap.put("OS", BaseApplication.os);
 		mMap.put("version", BaseApplication.version);
-		Iterator iter = mMap.entrySet().iterator();
-		JSONObject mObject = new JSONObject();
-		while (iter.hasNext()) {
-			Map.Entry entry = (Map.Entry) iter.next();
-			String key = entry.getKey().toString();
-			Object value = entry.getValue();
+		// 遍历mao,把键值对拼接为参数字符串
+		StringBuilder sb = new StringBuilder();
+		Set<String> keys = mMap.keySet();
+		Iterator<String> ite = keys.iterator();
+		while (ite.hasNext()) {
+			String key = ite.next();
+			String val = (String) mMap.get(key);
+			sb.append(key + "=" + val + "&");
 
-			try {
-				mObject.put(key, value);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
 		}
-
+		if(null==sb) {
+			// 把最后一个&字符移除
+			sb.deleteCharAt(sb.length() - 1);
+		}
 		byte[] b = null;
-		String s = mObject.toString();
-		Log.e("http", "http请求参数==" + s);
+		String s = sb.toString();
+
 		if (s != null && s.length() > 0) {
 			b = s.getBytes();
 		}
-
+//		Log.e("http请求参数==",""+b);
 		return b;
 
 	}

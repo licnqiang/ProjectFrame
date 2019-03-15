@@ -23,7 +23,7 @@ public class listDetailParser extends BaseParser {
 
     private Detail mInfo;
 
-    private String url = "/getNoteDetails";
+    private String url = "getNoteDetails";
 
 
     private NetControl.GetResultListenerCallback listener;

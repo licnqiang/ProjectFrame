@@ -22,7 +22,7 @@ public class CodeParser extends BaseParser {
 
     private BaseReseponseInfo baseReseponseInfo=new BaseReseponseInfo();
 
-    private String url = "/DorLogin/resLogin";
+    private String url = "DorLogin/resLogin";
 
 
     private NetControl.GetResultListenerCallback listener;

@@ -21,7 +21,7 @@ public class LoginParser extends BaseParser {
 
     private Login mInfo;
 
-    private String url = "/DorLogin/resLogin";
+    private String url = "userLogin";
 
 
     private NetControl.GetResultListenerCallback listener;
@@ -48,6 +48,7 @@ public class LoginParser extends BaseParser {
     @Override
     protected void parser() {
         try {
+            Log.e("-----------","-------------"+new Gson().toJson(mJson));
             mInfo = new Gson().fromJson(mJson.toString(), Login.class);
         } catch (Exception e) {
             Log.e(TAG, CLASS_NAME + "--e==" + e);
