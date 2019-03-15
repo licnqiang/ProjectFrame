@@ -34,6 +34,7 @@ public class ChangPswActivity extends BaseActivity {
     HashMap<String, String> mHashMap = new HashMap<>();
     @BindView(R.id.tv_title)
     TextView tvTitle;
+
     @BindView(R.id.et_user_name)
     EditText etUserName;
     @BindView(R.id.et_user_yzm)
