@@ -33,9 +33,9 @@ public class listDetailParser extends BaseParser {
 
         this.listener = listener;
 
-//        setTest(true);
-//
-//        setTestFileName("listDetail.txt");
+        setTest(true);
+
+        setTestFileName("listDetail.txt");
 
         setParameters(mHashMap);
 

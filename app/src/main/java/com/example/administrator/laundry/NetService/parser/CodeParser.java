@@ -32,9 +32,9 @@ public class CodeParser extends BaseParser {
 
         this.listener = listener;
 
-//        setTest(true);
-//
-//        setTestFileName("LoginParser.txt");
+        setTest(true);
+
+        setTestFileName("LoginParser.txt");
 
         setParameters(mHashMap);
 

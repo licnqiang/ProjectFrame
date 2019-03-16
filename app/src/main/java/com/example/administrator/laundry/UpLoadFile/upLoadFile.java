@@ -12,7 +12,7 @@ import retrofit2.Response;
 public class upLoadFile {
 
     public interface ResultCallBack {
-        void succeed(String str);
+        void succeed(List<String> str);
 
         void faild();
     }
@@ -37,7 +37,7 @@ public class upLoadFile {
                 BaseResponse fileInfo = response.body();
 
                 if(null!=fileInfo) {
-                    resultCallBack.succeed(fileInfo.imgNumber);
+                    resultCallBack.succeed(fileInfo.imgData);
                 }else {
                     resultCallBack.faild();
                 }

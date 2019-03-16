@@ -29,9 +29,9 @@ public class ForgetPswParser extends BaseParser {
 
         this.listener = listener;
 
-//        setTest(true);
-//
-//        setTestFileName("Common.txt");
+        setTest(true);
+
+        setTestFileName("Common.txt");
 
         setParameters(mHashMap);
 

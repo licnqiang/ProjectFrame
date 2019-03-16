@@ -18,28 +18,7 @@
             android:layout_height="88dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="50dp"
-            android:src="@mipmap/user_pic"
-           />
-
-        <ImageView
-            android:id="@+id/img_head_sex"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@id/img_head_portrait"
-            android:layout_alignRight="@id/img_head_portrait"
-            android:layout_gravity="center"
-            android:layout_marginLeft="-30dp"
-            android:background="@mipmap/self_touxiang" />
-
-        <ImageView
-            android:id="@+id/img_head_sex_chose"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignBottom="@id/img_head_portrait"
-            android:layout_alignRight="@id/img_head_portrait"
-            android:layout_gravity="center"
-            android:layout_marginBottom="4dp"
-            android:layout_marginRight="4dp" />
+            android:src="@mipmap/user_pic" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -47,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="65dp"
-            android:layout_toRightOf="@id/img_head_sex"
+            android:layout_toRightOf="@id/img_head_portrait"
             android:text="月月爱吃鱼"
             android:textColor="@color/white"
             android:textSize="20sp" />

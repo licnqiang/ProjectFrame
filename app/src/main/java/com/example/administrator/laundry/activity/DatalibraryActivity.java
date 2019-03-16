@@ -35,7 +35,7 @@ public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnR
     private List<PostListBean.NoteBean> listItem;
     HashMap<String, String> mHashMap = new HashMap<>();
     private PostListBean postListBean;
-
+    private int page = 1;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_collect;
@@ -66,8 +66,29 @@ public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnR
         homeAdapter = new HomeAdapter(this, listItem);
         homeAdapter.setOnItemClickListener(this);
         pullLoadMoreRecyclerView.setLinearLayout();
-        pullLoadMoreRecyclerView.setPullRefreshEnable(false);
-        pullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        pullLoadMoreRecyclerView.setPullRefreshEnable(true);
+        pullLoadMoreRecyclerView.setPushRefreshEnable(true);
+        pullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                mHashMap.clear();
+                mHashMap.put("noteType", "0");
+                mHashMap.put("use", "3");
+                mHashMap.put("noteId", page + "");
+                NetControl.GetPostList(postListCallback, mHashMap);
+            }
+
+            @Override
+            public void onLoadMore() {
+                mHashMap.clear();
+                mHashMap.put("noteType", "0");
+                mHashMap.put("use", "3");
+                mHashMap.put("noteId", page + "");
+                NetControl.GetPostList(postListCallback, mHashMap);
+
+            }
+        });
         pullLoadMoreRecyclerView.setAdapter(homeAdapter);
     }
 
@@ -81,9 +102,10 @@ public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnR
     protected void onResume() {
         super.onResume();
         mHashMap.clear();
-        mHashMap.put("noteType","0");
-        mHashMap.put("use","3");
-        mHashMap.put("noteId","0");
+        mHashMap.put("noteType", "0");
+        mHashMap.put("use", "3");
+        mHashMap.put("noteId", page+"");
+        NetControl.GetPostList(postListCallback, mHashMap);
         LoadingUI.showDialogForLoading(this,"正在加载",true);
         NetControl.GetPostList(postListCallback,mHashMap);
     }
@@ -108,6 +130,7 @@ public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnR
             if(null!=o){
                 postListBean=(PostListBean)o;
                 if(postListBean.getNote().size()>0){
+                    page++;
                     listItem.addAll(postListBean.getNote());
                     homeAdapter.notifyDataSetChanged();
                 }

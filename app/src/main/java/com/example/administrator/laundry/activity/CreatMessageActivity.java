@@ -1,9 +1,11 @@
 package com.example.administrator.laundry.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,10 +19,16 @@ import com.example.administrator.laundry.UpLoadFile.upLoadFile;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.base.BaseApplication;
 import com.example.administrator.laundry.fragment.SelectImageFragment;
+import com.example.administrator.laundry.util.GlideImageLoader;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
+import com.example.administrator.laundry.view.SelectDialog;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.ui.ImageGridActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,9 +42,12 @@ public class CreatMessageActivity extends BaseActivity {
     EditText content;
     @BindView(R.id.store_local)
     EditText storeLocal;
+    @BindView(R.id.store_type)
+    TextView storeType;
     private SelectImageFragment selectImageFragment;
     HashMap<String, String> mHashMap = new HashMap<>();
     private String nimageNumber;
+    private String noteTypeId=null;
 
     @Override
     protected int getLayoutId() {
@@ -72,9 +83,12 @@ public class CreatMessageActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_image, selectImageFragment).commitAllowingStateLoss();
     }
 
-    @OnClick({R.id.img_back, R.id.btn_send})
+    @OnClick({R.id.img_back, R.id.btn_send,R.id.store_type})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.store_type:
+                showPicDialog();
+                break;
             case R.id.img_back:
                 finish();
                 break;
@@ -82,12 +96,12 @@ public class CreatMessageActivity extends BaseActivity {
                 String tent = content.getText().toString();
                 String lacal = storeLocal.getText().toString();
 
-                if (!tent.isEmpty() && !lacal.isEmpty()) {
+                if (null!= noteTypeId&&!tent.isEmpty() && !lacal.isEmpty()) {
                     getImage();
                     mHashMap.clear();
                     mHashMap.put("noteImgNumber", nimageNumber);
                     mHashMap.put("noteContent", tent);
-                    mHashMap.put("noteTypeId", "1");
+                    mHashMap.put("noteTypeId", noteTypeId);
                     mHashMap.put("noteAddress", lacal);
                     LoadingUI.showDialogForLoading(this, "正在加载", true);
                     NetControl.CreatMessage(callback, mHashMap);
@@ -100,11 +114,59 @@ public class CreatMessageActivity extends BaseActivity {
     }
 
 
+    private void showPicDialog() {
+        List<String> names = new ArrayList<>();
+        names.add("求助类");
+        names.add("转让类");
+        names.add("其他类");
+        showDialog(new SelectDialog.SelectDialogListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        noteTypeId="1";
+                        storeType.setText("求助类");
+                        break;
+                    case 1:
+                        noteTypeId="2";
+                        storeType.setText("转让类");
+                        break;
+                    case 2:
+                        noteTypeId="3";
+                        storeType.setText("其他类");
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }, names);
+    }
+
+    /**
+     * 选择性别的dialog
+     *
+     * @param listener
+     * @param names
+     * @return
+     */
+    private SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {
+        SelectDialog dialog = new SelectDialog(CreatMessageActivity.this, R.style
+                .transparentFrameWindowStyle,
+                listener, names);
+        dialog.show();
+        return dialog;
+    }
+
+
+
     private void getImage(){
         upLoadFile.uploadFile(selectImageFragment.getSelectImg(), new upLoadFile.ResultCallBack() {
             @Override
-            public void succeed(String str) {
-                nimageNumber=nimageNumber+str+",";
+            public void succeed(List<String> str) {
+                for (String tr:str){
+                    nimageNumber=nimageNumber+tr+",";
+                }
                 nimageNumber.substring(0,nimageNumber.length()-1);
                 ToastUtil.show(CreatMessageActivity.this, "文件上传成功");
             }
@@ -146,11 +208,4 @@ public class CreatMessageActivity extends BaseActivity {
             }
         }
     };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

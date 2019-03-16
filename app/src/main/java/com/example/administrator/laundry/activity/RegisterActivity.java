@@ -247,8 +247,8 @@ public class RegisterActivity extends BaseActivity {
                     paths.add(images.get(0).path);
                     upLoadFile.uploadFile(paths, new upLoadFile.ResultCallBack() {
                         @Override
-                        public void succeed(String str) {
-                            nimageNumber=str;
+                        public void succeed(List<String> str) {
+                            nimageNumber=str.get(0);
                             ToastUtil.show(RegisterActivity.this, "文件上传成功");
                         }
 

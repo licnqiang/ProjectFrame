@@ -35,7 +35,7 @@ public class MyMessageActivity extends BaseActivity implements HomeAdapter.OnRec
     private List<PostListBean.NoteBean> listItem;
     HashMap<String, String> mHashMap = new HashMap<>();
     public PostListBean postListBean;
-
+    private int page = 1;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_collect;
@@ -66,8 +66,29 @@ public class MyMessageActivity extends BaseActivity implements HomeAdapter.OnRec
         homeAdapter = new HomeAdapter(this, listItem);
         homeAdapter.setOnItemClickListener(this);
         pullLoadMoreRecyclerView.setLinearLayout();
-        pullLoadMoreRecyclerView.setPullRefreshEnable(false);
-        pullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        pullLoadMoreRecyclerView.setPullRefreshEnable(true);
+        pullLoadMoreRecyclerView.setPushRefreshEnable(true);
+        pullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                mHashMap.clear();
+                mHashMap.put("noteType", "0");
+                mHashMap.put("use", "1");
+                mHashMap.put("noteId", page + "");
+                NetControl.GetPostList(postListCallback, mHashMap);
+
+            }
+
+            @Override
+            public void onLoadMore() {
+                mHashMap.clear();
+                mHashMap.put("noteType", "0");
+                mHashMap.put("use", "1");
+                mHashMap.put("noteId", page + "");
+                NetControl.GetPostList(postListCallback, mHashMap);
+            }
+        });
         pullLoadMoreRecyclerView.setAdapter(homeAdapter);
     }
 
@@ -106,6 +127,7 @@ public class MyMessageActivity extends BaseActivity implements HomeAdapter.OnRec
             if(null!=o){
                 postListBean=(PostListBean)o;
                 if(postListBean.getNote().size()>0){
+                    page++;
                     listItem.addAll(postListBean.getNote());
                     homeAdapter.notifyDataSetChanged();
                 }

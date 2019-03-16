@@ -51,6 +51,7 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
     private List<PostListBean.NoteBean> listItem;
     private PostListBean postListBean;
     HashMap<String, String> mHashMap = new HashMap<>();
+    private int page = 1;
 
     @Override
     protected int getLayoutId() {
@@ -86,13 +87,22 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
         pullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
             public void onRefresh() {
-
+                page=1;
+                mHashMap.clear();
+                mHashMap.put("noteType", "0");
+                mHashMap.put("use", "0");
+                mHashMap.put("noteId", page + "");
+                NetControl.GetPostList(postListCallback, mHashMap);
 
             }
 
             @Override
             public void onLoadMore() {
-
+                mHashMap.clear();
+                mHashMap.put("noteType", "0");
+                mHashMap.put("use", "0");
+                mHashMap.put("noteId", page + "");
+                NetControl.GetPostList(postListCallback, mHashMap);
             }
         });
         pullLoadMoreRecyclerView.setAdapter(homeAdapter);
@@ -146,25 +156,26 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
      */
     @Override
     public void onItemClick(View view, int position) {
-        startActivity(new Intent(getActivity(),MessagDetailActivity.class).putExtra("noteId",listItem.get(position).noteId));
+        startActivity(new Intent(getActivity(), MessagDetailActivity.class).putExtra("noteId", listItem.get(position).noteId));
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mHashMap.clear();
-        mHashMap.put("noteType","0");
-        mHashMap.put("use","0");
-        mHashMap.put("noteId","0");
-        NetControl.GetPostList(postListCallback,mHashMap);
+        mHashMap.put("noteType", "0");
+        mHashMap.put("use", "0");
+        mHashMap.put("noteId", page+"");
+        NetControl.GetPostList(postListCallback, mHashMap);
     }
 
     NetControl.GetResultListenerCallback postListCallback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
-            if(null!=o){
-                postListBean=(PostListBean)o;
-                if(postListBean.getNote().size()>0){
+            if (null != o) {
+                postListBean = (PostListBean) o;
+                if (postListBean.getNote().size() > 0) {
+                    page++;
                     listItem.addAll(postListBean.getNote());
                     homeAdapter.notifyDataSetChanged();
                 }

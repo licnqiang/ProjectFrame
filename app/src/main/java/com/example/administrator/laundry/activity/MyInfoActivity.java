@@ -14,6 +14,7 @@ import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.data.UserInfo;
 import com.example.administrator.laundry.R;
+import com.example.administrator.laundry.UpLoadFile.upLoadFile;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.util.GlideImageLoader;
 import com.example.administrator.laundry.util.ToastUtil;
@@ -56,6 +57,7 @@ public class MyInfoActivity extends BaseActivity {
     TextView userSex;
     private ArrayList<ImageItem> images;
     HashMap<String, String> mHashMap = new HashMap<>();
+    private String nimageNumber;
 
     @Override
     protected int getLayoutId() {
@@ -121,7 +123,7 @@ public class MyInfoActivity extends BaseActivity {
         String content = userContent.getText().toString();
         String sigin = userSigin.getText().toString();
         mHashMap.clear();
-        mHashMap.put("userImgNumber", "");
+        mHashMap.put("userImgNumber", nimageNumber);
         mHashMap.put("userIntroduce", content);
         mHashMap.put("userNickname", name);
         mHashMap.put("userSex", (sex.equals("男") ? 1 : 2) + "");
@@ -212,6 +214,21 @@ public class MyInfoActivity extends BaseActivity {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null) {
                     ImagePicker.getInstance().getImageLoader().displayImage(this, images.get(0).path, userImage, 0, 0);
+                    List<String>paths=new ArrayList<>();
+                    paths.add(images.get(0).path);
+                    upLoadFile.uploadFile(paths, new upLoadFile.ResultCallBack() {
+                        @Override
+                        public void succeed(List<String> str) {
+                            nimageNumber=str.get(0);
+                            ToastUtil.show(MyInfoActivity.this, "文件上传成功");
+                        }
+
+                        @Override
+                        public void faild() {
+                            ToastUtil.show(MyInfoActivity.this, "文件上传失败");
+                        }
+                    });
+
                 }
             }
         }
@@ -221,6 +238,7 @@ public class MyInfoActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         mHashMap.clear();
+        mHashMap.put("userId", "0");
         NetControl.getUserInfo(infoCallback,mHashMap);
     }
 
@@ -262,6 +280,7 @@ public class MyInfoActivity extends BaseActivity {
                 } else {
                     userSex.setText("女");
                 }
+                nimageNumber=userInfo.userImgNumber;
                 userAge.setText(userInfo.userWworkingTime);
                 userAddress.setText(userInfo.userShopAddress);
                 storeName.setText(userInfo.userShop);

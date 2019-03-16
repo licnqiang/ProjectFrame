@@ -29,7 +29,7 @@ public class ChangePswParser extends BaseParser {
 
         this.listener = listener;
 
-//        setTest(true);
+        setTest(true);
 //
         setTestFileName("Common.txt");
 
