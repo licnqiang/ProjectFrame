@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.data.Detail;
+import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.adapter.CommentAdapter;
@@ -23,10 +24,13 @@ import com.example.administrator.laundry.adapter.ImageAdapter;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.base.BaseApplication;
 import com.example.administrator.laundry.util.DateUtils;
+import com.example.administrator.laundry.util.SpHelper;
+import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.hb.dialog.myDialog.MyAlertInputDialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -124,13 +128,22 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
         myAlertInputDialog.setPositiveButton("确认", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showMsg(myAlertInputDialog.getResult());
-                myAlertInputDialog.dismiss();
+
+
+                if (myAlertInputDialog.getContentEditText().toString().isEmpty()) {
+                    ToastUtil.show(MessagDetailActivity.this, "请输入信息");
+                } else {
+                    myAlertInputDialog.dismiss();
+                    mHashMap.clear();
+                    mHashMap.put("noteId", noteId);
+                    LoadingUI.showDialogForLoading(MessagDetailActivity.this, "信息提交中", true);
+                    mHashMap.put("commentContent", myAlertInputDialog.getContentEditText().toString());
+                    NetControl.Comment(commentCallback, mHashMap);
+                }
             }
         }).setNegativeButton("取消", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showMsg("取消");
                 myAlertInputDialog.dismiss();
             }
         });
@@ -144,20 +157,17 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
                 finish();
                 break;
             case R.id.btn_like:
-                btnLike.setSelected(!btnLike.isSelected());
-                if (btnLike.isSelected()) {
-                    btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) + 1));
-                } else {
-                    btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) - 1));
-                }
+                mHashMap.clear();
+                mHashMap.put("noteId", noteId);
+                mHashMap.put("commentNumber", "0");
+                LoadingUI.showDialogForLoading(MessagDetailActivity.this, "数据加载中", true);
+                NetControl.Like(LikeCallback,mHashMap);
                 break;
             case R.id.btn_collect:
-                btnCollect.setSelected(!btnCollect.isSelected());
-                if (btnCollect.isSelected()) {
-                    btnCollectNum.setText("" + (Integer.valueOf(btnCollectNum.getText().toString()) + 1));
-                } else {
-                    btnCollectNum.setText("" + (Integer.valueOf(btnCollectNum.getText().toString()) - 1));
-                }
+                mHashMap.clear();
+                mHashMap.put("noteId", noteId);
+                LoadingUI.showDialogForLoading(MessagDetailActivity.this, "数据加载中", true);
+                NetControl.Collect(CollectCallback,mHashMap);
                 break;
             case R.id.btn_share:
                 btnShare.setSelected(!btnLike.isSelected());
@@ -182,9 +192,7 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
     }
 
     public void getData() {
-
         noteId = getIntent().getStringExtra("noteId");
-        Log.e("-------","-----noteId-----"+noteId);
     }
 
 
@@ -192,6 +200,7 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
     NetControl.GetResultListenerCallback postListCallback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            LoadingUI.hideDialogForLoading();
             if (null != o) {
                 detail = (Detail) o;
                 id = detail.noteId + "";
@@ -204,13 +213,60 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
                         .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
                         .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                         .into(userImage);
-
                 userName.setText(detail.userNickname);
                 btnLikeNum.setText(detail.notePraise);
                 comments.addAll(detail.comment);
                 commentAdapter.notifyDataSetChanged();
+                List<String> lis = Arrays.asList(detail.noteImgNumber.split(","));
+                iamges.clear();
+                iamges.addAll(lis);
+                imageAdapter.notifyDataSetChanged();
             }
 
+        }
+
+        @Override
+        public void onErro(Object o) {
+            LoadingUI.hideDialogForLoading();
+            if (o != null) {
+                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+                int code = mBaseReseponseInfo.getFlag();
+                String msg = mBaseReseponseInfo.getInfo();
+                if (msg != null && msg.length() > 0) {
+                    Log.e("TAG-code", code + "");
+                    Log.e("TAG-msg", msg);
+                    switch (code) {
+                        case BaseReseponseInfo.CODE_TOKEN_ERRO:
+                            Toast.makeText(
+                                    BaseApplication.ApplicationContext,
+                                    "登录失效，请重新登录！", Toast.LENGTH_SHORT)
+                                    .show();
+                            startActivity(new Intent(MessagDetailActivity.this,
+                                    LoginActivity.class).putExtra("flag",
+                                    false));
+                            finish();
+                            break;
+                        default:
+                            Toast.makeText(
+                                    BaseApplication.ApplicationContext,
+                                    msg + " code:" + code,
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            } else {
+                Toast.makeText(MessagDetailActivity.this,
+                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
+    NetControl.GetResultListenerCallback commentCallback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            mHashMap.put("noteId", noteId);
+            NetControl.getDetail(postListCallback, mHashMap);
         }
 
         @Override
@@ -248,17 +304,111 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
         }
     };
 
+
+
+    NetControl.GetResultListenerCallback CollectCallback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            LoadingUI.hideDialogForLoading();
+            btnCollect.setSelected(!btnCollect.isSelected());
+            if (btnCollect.isSelected()) {
+                btnCollectNum.setText("" + (Integer.valueOf(btnCollectNum.getText().toString()) + 1));
+            } else {
+                btnCollectNum.setText("" + (Integer.valueOf(btnCollectNum.getText().toString()) - 1));
+            }
+        }
+
+        @Override
+        public void onErro(Object o) {
+            LoadingUI.hideDialogForLoading();
+            if (o != null) {
+                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+                int code = mBaseReseponseInfo.getFlag();
+                String msg = mBaseReseponseInfo.getInfo();
+                if (msg != null && msg.length() > 0) {
+                    Log.e("TAG-code", code + "");
+                    Log.e("TAG-msg", msg);
+                    switch (code) {
+                        case BaseReseponseInfo.CODE_TOKEN_ERRO:
+                            Toast.makeText(
+                                    BaseApplication.ApplicationContext,
+                                    "登录失效，请重新登录！", Toast.LENGTH_SHORT)
+                                    .show();
+                            startActivity(new Intent(MessagDetailActivity.this,
+                                    LoginActivity.class).putExtra("flag",
+                                    false));
+                            finish();
+                            break;
+                        default:
+                            Toast.makeText(
+                                    BaseApplication.ApplicationContext,
+                                    msg + " code:" + code,
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            } else {
+                Toast.makeText(MessagDetailActivity.this,
+                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
+
+    NetControl.GetResultListenerCallback LikeCallback = new NetControl.GetResultListenerCallback() {
+        @Override
+        public void onFinished(Object o) {
+            LoadingUI.hideDialogForLoading();
+            btnLike.setSelected(!btnLike.isSelected());
+            if (btnLike.isSelected()) {
+                btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) + 1));
+            } else {
+                btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) - 1));
+            }
+        }
+
+        @Override
+        public void onErro(Object o) {
+            LoadingUI.hideDialogForLoading();
+            if (o != null) {
+                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+                int code = mBaseReseponseInfo.getFlag();
+                String msg = mBaseReseponseInfo.getInfo();
+                if (msg != null && msg.length() > 0) {
+                    Log.e("TAG-code", code + "");
+                    Log.e("TAG-msg", msg);
+                    switch (code) {
+                        case BaseReseponseInfo.CODE_TOKEN_ERRO:
+                            Toast.makeText(
+                                    BaseApplication.ApplicationContext,
+                                    "登录失效，请重新登录！", Toast.LENGTH_SHORT)
+                                    .show();
+                            startActivity(new Intent(MessagDetailActivity.this,
+                                    LoginActivity.class).putExtra("flag",
+                                    false));
+                            finish();
+                            break;
+                        default:
+                            Toast.makeText(
+                                    BaseApplication.ApplicationContext,
+                                    msg + " code:" + code,
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            } else {
+                Toast.makeText(MessagDetailActivity.this,
+                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
     @Override
     protected void onResume() {
         super.onResume();
         mHashMap.put("noteId", noteId);
         NetControl.getDetail(postListCallback, mHashMap);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

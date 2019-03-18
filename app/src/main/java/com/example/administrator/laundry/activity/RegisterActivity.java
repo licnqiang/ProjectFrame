@@ -61,6 +61,8 @@ public class RegisterActivity extends BaseActivity {
     EditText etUserCode;
     @BindView(R.id.et_user_login_psw)
     EditText etUserLoginPsw;
+    @BindView(R.id.et_user_login_psw_next)
+    EditText etUserLoginPswNext;
     @BindView(R.id.et_user_time)
     EditText etUserTime;
     @BindView(R.id.et_user_store_name)
@@ -76,7 +78,7 @@ public class RegisterActivity extends BaseActivity {
     public static final int REQUEST_CODE_SELECT = 100;
     private LSProgressDialog progressDialog;
     private ArrayList<ImageItem> images;
-    private String nimageNumber="";
+    private String nimageNumber = "";
 
     @Override
     protected int getLayoutId() {
@@ -243,12 +245,12 @@ public class RegisterActivity extends BaseActivity {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null) {
                     ImagePicker.getInstance().getImageLoader().displayImage(this, images.get(0).path, userImage, 0, 0);
-                    List<String>paths=new ArrayList<>();
+                    List<String> paths = new ArrayList<>();
                     paths.add(images.get(0).path);
                     upLoadFile.uploadFile(paths, new upLoadFile.ResultCallBack() {
                         @Override
                         public void succeed(List<String> str) {
-                            nimageNumber=str.get(0);
+                            nimageNumber = str.get(0);
                             ToastUtil.show(RegisterActivity.this, "文件上传成功");
                         }
 
@@ -340,32 +342,43 @@ public class RegisterActivity extends BaseActivity {
         String userStoreLocation = etUserStoreLocation.getText().toString().trim();
         String userSign = etUserSign.getText().toString().trim();
         String userCentent = etUserCentent.getText().toString().trim();
+        String userLoginPswNext = etUserLoginPswNext.getText().toString().trim();
+//        userTime.isEmpty() ||
+//                userStoreName.isEmpty() ||
+//                userStoreLocation.isEmpty() ||
+//                userSign.isEmpty() ||
+//                userCentent.isEmpty()
 
         if (userName.isEmpty() ||
                 userPhone.isEmpty() ||
                 userSex.isEmpty() ||
                 userCode.isEmpty() ||
                 userLoginPsw.isEmpty() ||
-                userTime.isEmpty() ||
-                userStoreName.isEmpty() ||
-                userStoreLocation.isEmpty() ||
-                userSign.isEmpty() ||
-                userCentent.isEmpty()) {
-            ToastUtil.show(RegisterActivity.this, "请输入所有信息");
+                userLoginPswNext.isEmpty() ||
+                nimageNumber.isEmpty()
+                ) {
+            ToastUtil.show(RegisterActivity.this, "请输入所有必填项");
         } else {
-            mHashMap.put("userPhone", userPhone);
-            mHashMap.put("proof",userCode);
-            mHashMap.put("userPassword", userLoginPsw);
-            mHashMap.put("userNickname", userName);
-            mHashMap.put("userImgNumber", nimageNumber);
-            mHashMap.put("userSign", userSign);
-            mHashMap.put("userIntroduce", userCentent);
-            mHashMap.put("userSex",(userSex.equals("男")?0:1)+"");
-            mHashMap.put("userWorkingTime", userTime);
-            mHashMap.put("userShop", userStoreName);
-            mHashMap.put("userShopAddress", userStoreLocation);
-            LoadingUI.showDialogForLoading(RegisterActivity.this,"正在加载",true);
-            NetControl.Register(regiserCallBack, mHashMap);
+
+            if (userLoginPswNext.equals(userLoginPsw)) {
+                mHashMap.put("userPhone", userPhone);
+                mHashMap.put("proof", userCode);
+                mHashMap.put("userPassword", userLoginPsw);
+                mHashMap.put("userNickname", userName);
+                mHashMap.put("userImgNumber", nimageNumber);
+                mHashMap.put("userSign", userSign);
+                mHashMap.put("userIntroduce", userCentent);
+                mHashMap.put("userSex", (userSex.equals("男") ? 0 : 1) + "");
+                mHashMap.put("userWorkingTime", userTime);
+                mHashMap.put("userShop", userStoreName);
+                mHashMap.put("userShopAddress", userStoreLocation);
+                LoadingUI.showDialogForLoading(RegisterActivity.this, "正在加载", true);
+                NetControl.Register(regiserCallBack, mHashMap);
+            } else {
+                ToastUtil.show(RegisterActivity.this, "两次密码不一致");
+            }
+
+
         }
 
     }

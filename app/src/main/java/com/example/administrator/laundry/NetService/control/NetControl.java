@@ -2,8 +2,11 @@ package com.example.administrator.laundry.NetService.control;
 
 import com.example.administrator.laundry.NetService.parser.ChangePswParser;
 import com.example.administrator.laundry.NetService.parser.CodeParser;
+import com.example.administrator.laundry.NetService.parser.CollectParser;
+import com.example.administrator.laundry.NetService.parser.CommentParser;
 import com.example.administrator.laundry.NetService.parser.CreatMessageParser;
 import com.example.administrator.laundry.NetService.parser.ForgetPswParser;
+import com.example.administrator.laundry.NetService.parser.LikeParser;
 import com.example.administrator.laundry.NetService.parser.LoginParser;
 import com.example.administrator.laundry.NetService.parser.PostListParser;
 import com.example.administrator.laundry.NetService.parser.RegisterParser;
@@ -141,4 +144,34 @@ public class NetControl {
         mParser.start();
     }
 
+    /**
+     * 评价
+     */
+    public static void Comment(final GetResultListenerCallback listener,
+                                final HashMap<String, String> mHashMap) {
+
+        CommentParser mParser = new CommentParser(listener, mHashMap);
+        mParser.start();
+    }
+
+    /**
+     * 收藏
+     */
+    public static void Collect(final GetResultListenerCallback listener,
+                               final HashMap<String, String> mHashMap) {
+
+        CollectParser mParser = new CollectParser(listener, mHashMap);
+        mParser.start();
+    }
+
+
+    /**
+     * 点赞
+     */
+    public static void Like(final GetResultListenerCallback listener,
+                               final HashMap<String, String> mHashMap) {
+
+        LikeParser mParser = new LikeParser(listener, mHashMap);
+        mParser.start();
+    }
 }

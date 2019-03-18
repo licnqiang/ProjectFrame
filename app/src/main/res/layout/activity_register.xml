@@ -30,12 +30,28 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="头像"
-                    android:textColor="@color/them_black_font" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/headiamge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="头像"
+                        android:textColor="@color/them_black_font" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/headiamge"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
 
                 <ImageView
                     android:id="@+id/user_image"
@@ -53,12 +69,29 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="昵称"
-                    android:textColor="@color/them_black_font" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/nicheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="昵称"
+                        android:textColor="@color/them_black_font" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/nicheng"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/et_user_name"
@@ -80,12 +113,29 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="电话号"
-                    android:textColor="@color/them_black_font" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="电话号"
+                        android:textColor="@color/them_black_font" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/phone"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/et_user_phone"
@@ -118,12 +168,28 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="验证码"
-                    android:textColor="@color/them_black_font" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/yzm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="验证码"
+                        android:textColor="@color/them_black_font" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/yzm"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/et_user_code"
@@ -146,12 +212,28 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="性别"
-                    android:textColor="@color/them_black_font" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="性别"
+                        android:textColor="@color/them_black_font" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/sex"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/et_user_sex"
@@ -159,6 +241,51 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="男"
+                    android:textColor="@color/them_black_font"
+                    android:textColorHint="@color/them_black_font"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit_frame"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/psw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="登陆密码"
+                        android:textColor="@color/them_black_font" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/psw"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/et_user_login_psw"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="请输入登陆密码"
                     android:paddingLeft="20dp"
                     android:textColor="@color/them_black_font"
                     android:textColorHint="@color/them_black_font"
@@ -174,24 +301,42 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="登陆密码"
-                    android:textColor="@color/them_black_font" />
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/qurenpsw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="登陆密码"
+                        android:textColor="@color/them_black_font" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_toRightOf="@+id/qurenpsw"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="@color/bg_title" />
+
+                </RelativeLayout>
 
                 <EditText
-                    android:id="@+id/et_user_login_psw"
+                    android:id="@+id/et_user_login_psw_next"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入登陆密码"
+                    android:hint="请输入确认密码"
                     android:paddingLeft="20dp"
                     android:textColor="@color/them_black_font"
                     android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
+
+
 
 
             <LinearLayout
