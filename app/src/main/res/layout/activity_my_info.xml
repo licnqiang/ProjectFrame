@@ -70,7 +70,6 @@
             <EditText
                 android:id="@+id/user_age"
                 style="@style/user_info_edit_style"
-                android:digits="1234567890"
                 android:hint="2012"
                 android:inputType="number"
                 android:singleLine="true" />

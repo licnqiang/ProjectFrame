@@ -29,9 +29,6 @@ public class UserInfoSaveParser extends BaseParser {
 
         this.listener = listener;
 
-        setTest(true);
-
-        setTestFileName("user.txt");
 
         setParameters(mHashMap);
 

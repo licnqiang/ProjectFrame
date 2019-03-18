@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.data.Login;
 import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
@@ -171,9 +172,14 @@ public class LoginActivity extends BaseActivity {
     NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            if(null==o){
+                return;
+            }
+            Login login=(Login)o;
             LoadingUI.hideDialogForLoading();
             //保存token
-            SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, o.toString());
+            SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, login.token);
+            BaseApplication.token= SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);
             //登录环信
 //            login();
             toActivity(MainActivity.class);

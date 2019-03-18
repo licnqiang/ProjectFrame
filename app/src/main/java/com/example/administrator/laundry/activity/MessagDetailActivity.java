@@ -182,7 +182,9 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
     }
 
     public void getData() {
+
         noteId = getIntent().getStringExtra("noteId");
+        Log.e("-------","-----noteId-----"+noteId);
     }
 
 

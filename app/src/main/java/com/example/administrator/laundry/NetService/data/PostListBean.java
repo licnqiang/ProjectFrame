@@ -30,7 +30,7 @@ public class PostListBean extends BaseReseponseInfo{
          */
 
         public String noteContent;
-        public int noteId;
+        public String noteId;
         public String noteTime;
         public String userImgNumber;
         public String userNickname;

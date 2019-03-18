@@ -165,7 +165,7 @@ public abstract class BaseParser<T extends BaseReseponseInfo> extends Thread {
 			String token = BaseApplication.token;
 			//String postData2=new String(postData).replace("\\", "");
 			//Log.e("postData2", postData2);
-			String check = MD5Utils.MD5Encode(new String(postData),"UTF-8");
+			String check = MD5Utils.MD5Encode("ym"+BaseApplication.token,"UTF-8");
 //			Log.e("postData", new String(postData));
 			Log.e("check", check);
 			mHttpConnector.setRequestProperty("check", check);
@@ -291,7 +291,7 @@ public abstract class BaseParser<T extends BaseReseponseInfo> extends Thread {
 		if (s != null && s.length() > 0) {
 			b = s.getBytes();
 		}
-//		Log.e("http请求参数==",""+b);
+		Log.e("http请求参数==",""+s);
 		return b;
 
 	}

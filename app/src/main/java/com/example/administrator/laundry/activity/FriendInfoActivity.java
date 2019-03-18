@@ -105,6 +105,7 @@ public class FriendInfoActivity extends BaseActivity {
         super.onResume();
         mHashMap.clear();
         LoadingUI.showDialogForLoading(this,"正在加载",true);
+        mHashMap.put("userId",getIntent().getStringExtra("id"));
         NetControl.getUserInfo(infoCallback,mHashMap);
     }
 
@@ -121,7 +122,7 @@ public class FriendInfoActivity extends BaseActivity {
 
 
                 userName.setText(userInfo.userNickname);
-                if (userInfo.userSex == 1) {
+                if (userInfo.userSex == 0) {
                     userSex.setText("男");
                 } else {
                     userSex.setText("女");
@@ -138,7 +139,7 @@ public class FriendInfoActivity extends BaseActivity {
         @Override
         public void onErro(Object o) {
             BaseReseponseInfo baseReseponseInfo = (BaseReseponseInfo) o;
-            if (null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
+            if (null != baseReseponseInfo&&null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
                 ToastUtil.show(FriendInfoActivity.this, baseReseponseInfo.getInfo());
             } else {
                 ToastUtil.show(FriendInfoActivity.this, "获取失败");

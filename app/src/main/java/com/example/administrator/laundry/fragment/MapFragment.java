@@ -156,6 +156,7 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
      */
     @Override
     public void onItemClick(View view, int position) {
+        Log.e("-------","----------"+listItem.get(position).noteId);
         startActivity(new Intent(getActivity(), MessagDetailActivity.class).putExtra("noteId", listItem.get(position).noteId));
     }
 
@@ -172,9 +173,13 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
     NetControl.GetResultListenerCallback postListCallback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
+            pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
             if (null != o) {
                 postListBean = (PostListBean) o;
                 if (postListBean.getNote().size() > 0) {
+                    if(1==page){
+                        listItem.clear();
+                    }
                     page++;
                     listItem.addAll(postListBean.getNote());
                     homeAdapter.notifyDataSetChanged();
@@ -185,6 +190,7 @@ public class MapFragment extends BaseFragment implements HomeAdapter.OnRecyclerV
 
         @Override
         public void onErro(Object o) {
+            pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
             if (o != null) {
                 BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
                 int code = mBaseReseponseInfo.getFlag();

@@ -33,9 +33,9 @@ public class PostListParser extends BaseParser {
 
         this.listener = listener;
 
-        setTest(true);
-
-        setTestFileName("PostList.txt");
+//        setTest(true);
+//
+//        setTestFileName("PostList.txt");
 
         setParameters(mHashMap);
 

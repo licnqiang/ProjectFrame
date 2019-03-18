@@ -32,9 +32,9 @@ public class UserInfoParser extends BaseParser {
 
         this.listener = listener;
 
-        setTest(true);
-
-        setTestFileName("user.txt");
+//        setTest(true);
+//
+//        setTestFileName("user.txt");
 
         setParameters(mHashMap);
 

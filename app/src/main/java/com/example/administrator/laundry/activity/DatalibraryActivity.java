@@ -126,10 +126,14 @@ public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnR
 
         @Override
         public void onFinished(Object o) {
+            pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
             LoadingUI.hideDialogForLoading();
             if(null!=o){
                 postListBean=(PostListBean)o;
                 if(postListBean.getNote().size()>0){
+                    if(1==page){
+                        listItem.clear();
+                    }
                     page++;
                     listItem.addAll(postListBean.getNote());
                     homeAdapter.notifyDataSetChanged();
@@ -140,6 +144,7 @@ public class DatalibraryActivity extends BaseActivity implements HomeAdapter.OnR
 
         @Override
         public void onErro(Object o) {
+            pullLoadMoreRecyclerView.setPullLoadMoreCompleted();
             if (o != null) {
                 BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
                 int code = mBaseReseponseInfo.getFlag();
