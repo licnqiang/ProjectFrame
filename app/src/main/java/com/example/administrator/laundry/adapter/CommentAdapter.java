@@ -83,7 +83,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
         @BindView(R.id.btn_like_num)
         TextView btnLikeNum;
         @BindView(R.id.btn_like)
-        TextView btnLike;
+        ImageView btnLike;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
