@@ -38,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MessagDetailActivity extends BaseActivity implements CommentAdapter.OnRecyclerViewItemClickListener {
+public class MessagDetailActivity extends BaseActivity implements CommentAdapter.OnRecyclerViewItemClickListener,CommentAdapter.PingItemClickListener  {
 
     HashMap<String, String> mHashMap = new HashMap<>();
     @BindView(R.id.tv_title)
@@ -101,6 +101,7 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
         comments = new ArrayList<>();
         commentAdapter = new CommentAdapter(this, comments);
         commentAdapter.setOnItemClickListener(this);
+        commentAdapter.setOnPingItemClickListener(this);
         commetList.setLayoutManager(new LinearLayoutManager(this));
         commetList.setHasFixedSize(true);
         commetList.setAdapter(commentAdapter);
@@ -360,12 +361,15 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
         @Override
         public void onFinished(Object o) {
             LoadingUI.hideDialogForLoading();
-            btnLike.setSelected(!btnLike.isSelected());
-            if (btnLike.isSelected()) {
-                btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) + 1));
-            } else {
-                btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) - 1));
-            }
+//            btnLike.setSelected(!btnLike.isSelected());
+//            if (btnLike.isSelected()) {
+//                btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) + 1));
+//            } else {
+//                btnLikeNum.setText("" + (Integer.valueOf(btnLikeNum.getText().toString()) - 1));
+//            }
+
+            mHashMap.put("noteId", noteId);
+            NetControl.getDetail(postListCallback, mHashMap);
         }
 
         @Override
@@ -410,5 +414,14 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
         super.onResume();
         mHashMap.put("noteId", noteId);
         NetControl.getDetail(postListCallback, mHashMap);
+    }
+
+    @Override
+    public void onPingItemClick(View view, int position) {
+        mHashMap.clear();
+        mHashMap.put("noteId", "0");
+        mHashMap.put("commentNumber", detail.comment.get(position).commentNumber+"");
+        LoadingUI.showDialogForLoading(MessagDetailActivity.this, "数据加载中", true);
+        NetControl.Like(LikeCallback,mHashMap);
     }
 }

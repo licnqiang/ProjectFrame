@@ -29,6 +29,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
     private List<Detail.Comment> mData;
     private LayoutInflater mInflater;
     private OnRecyclerViewItemClickListener listener;
+    private PingItemClickListener pinlistener;
 
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, int position);
@@ -39,7 +40,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
     }
 
 
-    public CommentAdapter(Context mContext,List<Detail.Comment> mData) {
+    public interface PingItemClickListener {
+        void onPingItemClick(View view, int position);
+    }
+
+    public void setOnPingItemClickListener(PingItemClickListener listener) {
+        this.pinlistener = listener;
+    }
+
+
+    public CommentAdapter(Context mContext, List<Detail.Comment> mData) {
         this.mContext = mContext;
         this.mData = mData;
         this.mInflater = LayoutInflater.from(mContext);
@@ -72,16 +82,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
         TextView time;
         @BindView(R.id.btn_like_num)
         TextView btnLikeNum;
+        @BindView(R.id.btn_like)
+        TextView btnLike;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            ivImg.setOnClickListener(this);
+            btnLike.setOnClickListener(this);
         }
 
         public void bind(int position) {
             //设置条目的点击事件
             itemView.setOnClickListener(this);
-            Detail.Comment  comment=mData.get(position);
+            Detail.Comment comment = mData.get(position);
             //根据条目位置设置图片
             Glide.with(mContext)                             //配置上下文
                     .load(comment.userImgNumber)      //设置图片路径(fix #8,文件名包含%符号 无法识别和显示)
@@ -97,10 +111,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
             clickPosition = position;
         }
 
+
         @Override
         public void onClick(View v) {
             if (listener != null) {
-                listener.onItemClick(v, clickPosition);
+                switch (v.getId()) {
+                    case R.id.btn_like:
+                        pinlistener.onPingItemClick(v, clickPosition);
+                        break;
+                    case R.id.iv_img:
+                        listener.onItemClick(v, clickPosition);
+                        break;
+                }
+
             }
         }
     }
