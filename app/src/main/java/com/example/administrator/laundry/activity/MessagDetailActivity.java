@@ -38,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MessagDetailActivity extends BaseActivity implements CommentAdapter.OnRecyclerViewItemClickListener,CommentAdapter.PingItemClickListener  {
+public class MessagDetailActivity extends BaseActivity implements CommentAdapter.OnRecyclerViewItemClickListener, CommentAdapter.PingItemClickListener {
 
     HashMap<String, String> mHashMap = new HashMap<>();
     @BindView(R.id.tv_title)
@@ -162,13 +162,13 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
                 mHashMap.put("noteId", noteId);
                 mHashMap.put("commentNumber", "0");
                 LoadingUI.showDialogForLoading(MessagDetailActivity.this, "数据加载中", true);
-                NetControl.Like(LikeCallback,mHashMap);
+                NetControl.Like(LikeCallback, mHashMap);
                 break;
             case R.id.btn_collect:
                 mHashMap.clear();
                 mHashMap.put("noteId", noteId);
                 LoadingUI.showDialogForLoading(MessagDetailActivity.this, "数据加载中", true);
-                NetControl.Collect(CollectCallback,mHashMap);
+                NetControl.Collect(CollectCallback, mHashMap);
                 break;
             case R.id.btn_share:
                 btnShare.setSelected(!btnLike.isSelected());
@@ -217,6 +217,9 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
                 userName.setText(detail.userNickname);
                 btnLikeNum.setText(detail.notePraise);
                 comments.addAll(detail.comment);
+
+                btnCollect.setSelected(detail.collectFlag == 1);
+                btnLike.setSelected(detail.noteFlag == 1);
                 commentAdapter.notifyDataSetChanged();
                 List<String> lis = Arrays.asList(detail.noteImgNumber.split(","));
                 iamges.clear();
@@ -306,7 +309,6 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
     };
 
 
-
     NetControl.GetResultListenerCallback CollectCallback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
@@ -354,7 +356,6 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
             }
         }
     };
-
 
 
     NetControl.GetResultListenerCallback LikeCallback = new NetControl.GetResultListenerCallback() {
@@ -420,8 +421,8 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
     public void onPingItemClick(View view, int position) {
         mHashMap.clear();
         mHashMap.put("noteId", "0");
-        mHashMap.put("commentNumber", detail.comment.get(position).commentNumber+"");
+        mHashMap.put("commentNumber", detail.comment.get(position).commentNumber + "");
         LoadingUI.showDialogForLoading(MessagDetailActivity.this, "数据加载中", true);
-        NetControl.Like(LikeCallback,mHashMap);
+        NetControl.Like(LikeCallback, mHashMap);
     }
 }

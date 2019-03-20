@@ -13,12 +13,15 @@ public class Detail extends BaseReseponseInfo {
     public String noteTime;
     public String userId;
     public String notePraise;
+    public int noteFlag;
+    public int collectFlag;
     public List<Comment> comment;
 
     public class Comment {
         public String userImgNumber;
         public String userNickname;
         public int commentNumber;
+        public int  commentFlag;
 
         public String commentContent;
         public String userId;

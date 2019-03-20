@@ -83,7 +83,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
         @BindView(R.id.btn_like_num)
         TextView btnLikeNum;
         @BindView(R.id.btn_like)
-        TextView btnLike;
+        ImageView btnLike;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
@@ -103,7 +103,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Selected
                     .placeholder(R.mipmap.collect_mrtp)     //设置占位图片
                     .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存全尺寸
                     .into(ivImg);
-
+            btnLike.setSelected(comment.commentFlag==1);
             tvName.setText(comment.userNickname);
             content.setText(comment.commentContent);
             time.setText(DateUtils.stampToDate(comment.commentTime));
