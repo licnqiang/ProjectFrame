@@ -23,6 +23,7 @@ public class UserInfo extends BaseReseponseInfo{
     public String userImgNumber;
     public String userSign;
     public String userIntroduce;
+    public String userPhone;
     public int userSex;
     public String userWworkingTime;
     public String userShop;

@@ -30,6 +30,7 @@ import com.example.administrator.laundry.view.SelectDialog;
 import com.example.administrator.laundry.view.progress.LSProgressDialog;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.exceptions.HyphenateException;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -142,14 +143,14 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    public void register() {
+    public void register(String username,String psw) {
         progressDialog = new LSProgressDialog(this);
         progressDialog.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    EMClient.getInstance().createAccount(etUserName.getText().toString().trim(), etUserLoginPsw.getText().toString().trim());
+                    EMClient.getInstance().createAccount(username, psw);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -361,6 +362,7 @@ public class RegisterActivity extends BaseActivity {
         } else {
 
             if (userLoginPswNext.equals(userLoginPsw)) {
+                register(EaseConstant.EXTRA_HUANXIN+userPhone,userLoginPsw);
                 mHashMap.put("userPhone", userPhone);
                 mHashMap.put("proof", userCode);
                 mHashMap.put("userPassword", userLoginPsw);

@@ -17,6 +17,7 @@ import com.example.administrator.laundry.NetService.data.UserInfo;
 import com.example.administrator.laundry.NetService.util.LoadingUI;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
+import com.example.administrator.laundry.util.SpHelper;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.LoadDataView;
 import com.hyphenate.easeui.EaseConstant;
@@ -95,7 +96,9 @@ public class FriendInfoActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_send_message:
-                startActivity(new Intent(FriendInfoActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, "jiting"));
+                startActivity(new Intent(FriendInfoActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, EaseConstant.EXTRA_HUANXIN + userInfo.userPhone)
+                );
+
                 break;
         }
     }
@@ -104,12 +107,13 @@ public class FriendInfoActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         mHashMap.clear();
-        LoadingUI.showDialogForLoading(this,"正在加载",true);
-        mHashMap.put("userId",getIntent().getStringExtra("id"));
-        NetControl.getUserInfo(infoCallback,mHashMap);
+        LoadingUI.showDialogForLoading(this, "正在加载", true);
+        mHashMap.put("userId", getIntent().getStringExtra("id"));
+        NetControl.getUserInfo(infoCallback, mHashMap);
     }
 
 
+    private UserInfo userInfo;
     /**
      * 个人信息
      */
@@ -118,7 +122,7 @@ public class FriendInfoActivity extends BaseActivity {
         public void onFinished(Object o) {
             LoadingUI.hideDialogForLoading();
             if (null != o) {
-                UserInfo userInfo = (UserInfo) o;
+                userInfo = (UserInfo) o;
 
 
                 userName.setText(userInfo.userNickname);
@@ -132,14 +136,14 @@ public class FriendInfoActivity extends BaseActivity {
                 storeName.setText(userInfo.userShop);
                 userContent.setText(userInfo.userIntroduce);
                 userSigin.setText(userInfo.userSign);
-
+                SpHelper.setStringValue(EaseConstant.EXTRA_USER_name,EaseConstant.EXTRA_HUANXIN+userInfo.userPhone);
             }
         }
 
         @Override
         public void onErro(Object o) {
             BaseReseponseInfo baseReseponseInfo = (BaseReseponseInfo) o;
-            if (null != baseReseponseInfo&&null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
+            if (null != baseReseponseInfo && null != baseReseponseInfo.getInfo() && baseReseponseInfo.getInfo().isEmpty()) {
                 ToastUtil.show(FriendInfoActivity.this, baseReseponseInfo.getInfo());
             } else {
                 ToastUtil.show(FriendInfoActivity.this, "获取失败");

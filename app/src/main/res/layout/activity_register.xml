@@ -30,28 +30,13 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/headiamge"
                     android:layout_width="100dp"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/headiamge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="left|center"
-                        android:text="头像"
-                        android:textColor="@color/them_black_font" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="15dp"
-                        android:layout_toRightOf="@+id/headiamge"
-                        android:gravity="center"
-                        android:text="*"
-                        android:textColor="@color/bg_title" />
-
-                </RelativeLayout>
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:text="头像"
+                    android:textColor="@color/them_black_font" />
 
                 <ImageView
                     android:id="@+id/user_image"
@@ -335,8 +320,6 @@
                     android:textColorHint="@color/them_black_font"
                     android:textSize="14sp" />
             </LinearLayout>
-
-
 
 
             <LinearLayout

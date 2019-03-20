@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
 
 import java.util.HashMap;
 
@@ -96,7 +97,7 @@ public class LoginActivity extends BaseActivity {
     public void login() {
         progressDialog = new LSProgressDialog(this);
         progressDialog.show();
-        EMClient.getInstance().login(etUserName.getText().toString(), etUserPsw.getText().toString(), new EMCallBack() {
+        EMClient.getInstance().login(EaseConstant.EXTRA_HUANXIN+etUserName.getText().toString(), etUserPsw.getText().toString(), new EMCallBack() {
             @Override
             public void onSuccess() {
                 runOnUiThread(new Runnable() {
@@ -181,9 +182,9 @@ public class LoginActivity extends BaseActivity {
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, login.token);
             BaseApplication.token= SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);
             //登录环信
-//            login();
-            toActivity(MainActivity.class);
-            finish();
+            login();
+//            toActivity(MainActivity.class);
+//            finish();
         }
 
         @Override
