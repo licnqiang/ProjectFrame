@@ -216,6 +216,7 @@ public class MessagDetailActivity extends BaseActivity implements CommentAdapter
                         .into(userImage);
                 userName.setText(detail.userNickname);
                 btnLikeNum.setText(detail.notePraise);
+                comments.clear();
                 comments.addAll(detail.comment);
 
                 btnCollect.setSelected(detail.collectFlag == 1);
