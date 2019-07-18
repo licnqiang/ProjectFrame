@@ -1,52 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/title_bar_container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:layout_marginTop="1dp"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp"
-    android:background="@color/white"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/user_head"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/self" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="爬坡的拖拉机"
-            android:textColor="@color/them_black_font"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="今天洗衣棒棒哒! 以后我还要洗"
-            android:textColor="@color/home_address_textcolor" />
-
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="11:20"
-            android:textColor="@color/them_black_font" />
-
-    </LinearLayout>
-
+    android:layout_height="match_parent"
+    android:background="@color/gray5"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="首页"
+        android:textSize="@dimen/text_16dp"
+        android:gravity="center"
+        android:layout_height="match_parent" />
 </LinearLayout>

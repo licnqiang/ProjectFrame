@@ -28,60 +28,14 @@
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
 
-        <!-- 这个是查看大图的activity -->
-        <activity
-            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" />
-
-        <!-- 设置环信应用的AppKey -->
-        <meta-data
-            android:name="EASEMOB_APPKEY"
-            android:value="1100190125097094#ym-laundry" />
-        <!-- 声明SDK所需的service SDK核心功能 -->
-        <service
-            android:name="com.hyphenate.chat.EMChatService"
-            android:exported="true" />
-        <service
-            android:name="com.hyphenate.chat.EMJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!-- 声明SDK所需的receiver -->
-        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-            <!-- 可选filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
-        <!-- 查看地图的activity -->
-        <activity
-            android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" />
-
-        <!-- 百度地图 -->
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Ncrll9O7bzPiginIlacQEY5mtGjrhoZV" />
-
         <activity android:name=".activity.MainActivity" />
+
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login">
@@ -93,19 +47,7 @@
         </activity>
         <activity android:name=".activity.ForgetPswActivity" />
         <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.CreatMessageActivity" />
-        <activity android:name=".activity.MyCollectActivity" />
-        <activity android:name=".activity.SetActivity" />
         <activity android:name=".activity.ChangPswActivity" />
-        <activity android:name=".activity.SayDetailActivity" />
-        <activity android:name=".activity.ChatListActivity" />
-        <activity android:name=".activity.ChatActivity" />
-        <activity android:name=".activity.MessagDetailActivity" />
-        <activity android:name=".activity.FriendInfoActivity"></activity>
-        <activity android:name=".activity.MyMessageActivity"></activity>
-        <activity android:name=".activity.MyInfoActivity"></activity>
-        <activity android:name=".activity.DatalibraryActivity"></activity>
 
-</application>
+    </application>
 </manifest>

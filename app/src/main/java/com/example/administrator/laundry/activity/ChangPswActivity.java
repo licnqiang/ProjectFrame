@@ -1,13 +1,10 @@
 package com.example.administrator.laundry.activity;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.util.LoadingUI;
@@ -15,17 +12,11 @@ import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
 import com.example.administrator.laundry.base.BaseActivity;
 import com.example.administrator.laundry.base.BaseApplication;
-import com.example.administrator.laundry.constant.SysContant;
 import com.example.administrator.laundry.util.RxDeviceTool;
-import com.example.administrator.laundry.util.SpHelper;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.CountDownTextView;
-import com.example.administrator.laundry.view.LoadDataView;
-
 import java.util.HashMap;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ChangPswActivity extends BaseActivity {
@@ -34,7 +25,6 @@ public class ChangPswActivity extends BaseActivity {
     HashMap<String, String> mHashMap = new HashMap<>();
     @BindView(R.id.tv_title)
     TextView tvTitle;
-
     @BindView(R.id.et_user_name)
     EditText etUserName;
     @BindView(R.id.et_user_yzm)
@@ -59,16 +49,6 @@ public class ChangPswActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected ViewGroup loadDataViewLayout() {
-        return null;
-    }
-
-    @Override
-    protected void getLoadView(LoadDataView loadView) {
-
-    }
-
     @OnClick({R.id.img_back, R.id.btn_forgetPsw, R.id.send_yzm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -76,7 +56,8 @@ public class ChangPswActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_forgetPsw:
-                judgeData();
+//                judgeData();
+                finish();
                 break;
             case R.id.send_yzm:
                 String etUserPhone = etUserName.getText().toString();

@@ -40,8 +40,8 @@
         android:layout_height="55dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/edit_frame"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:paddingLeft="10dp">
 
@@ -109,7 +109,6 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="30dp"
-        android:background="@mipmap/btn_p"
         android:text="修改密码"
         android:textColor="@color/white" />
 

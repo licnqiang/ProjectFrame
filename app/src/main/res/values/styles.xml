@@ -9,12 +9,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="collect_function_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:button">@null</item>
-    </style>
-
     <!-- 自定义Loading Dialog -->
     <style name="loading_dialog_style" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -24,88 +18,4 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="common_liner_lefttv_style">
-        <item name="android:layout_width">80dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/them_black_font</item>
-        <item name="android:layout_marginLeft">15dp</item>
-    </style>
-
-    <style name="user_info_edit_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:background">@null</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name=" android:gravity">center_vertical|right</item>
-        <item name=" android:singleLine">true</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name=" android:textColor">@color/them_black_font</item>
-        <item name=" android:textSize">14sp</item>
-    </style>
-
-    <style name="user_view_right_line_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/light_gray</item>
-    </style>
-
-    <style name="dialog_animstyle">
-        <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
-        <item name="android:windowExitAnimation">@anim/photo_dialog_out_anim</item>
-    </style>
-
-    <!--项目组下拉选择-->
-    <style name="main_menu_animstyle">
-        <item name="android:windowEnterAnimation">@anim/group_dialog_in_anim</item>
-        <item name="android:windowExitAnimation">@anim/group_dialog_out_anim</item>
-    </style>
-
-    <style name="transparentFrameWindowStyle" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@drawable/photo_choose_bg</item>
-    </style>
-
-    <style name="user_manager_linear_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="LoadingProgressDialog" parent="Theme.AppCompat.Dialog">
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="colorAccent">@color/colorPrimary</item>
-    </style>
-
-    <style name="list_left_img">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
-        <item name="android:layout_marginLeft">21dp</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="list_text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/black_user</item>
-        <item name="android:layout_marginLeft">18dp</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="list_right_img">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
-        <item name="android:layout_marginRight">21dp</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <!--圆形loading progressbar-->
-    <style name="myProgressBar" parent="Base.Widget.AppCompat.ProgressBar">
-        <item name="android:indeterminateTint" tools:targetApi="lollipop">@color/colorPrimary</item>
-        <item name="android:indeterminateTintMode" tools:targetApi="lollipop">src_atop</item>
-
-    </style>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.administrator.laundry.activity;
 
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.example.administrator.laundry.base.BaseApplication;
 import com.example.administrator.laundry.util.RxDeviceTool;
 import com.example.administrator.laundry.util.ToastUtil;
 import com.example.administrator.laundry.view.CountDownTextView;
-import com.example.administrator.laundry.view.LoadDataView;
 
 import java.util.HashMap;
 
@@ -54,16 +52,6 @@ public class ForgetPswActivity extends BaseActivity {
     protected void initData() {
     }
 
-    @Override
-    protected ViewGroup loadDataViewLayout() {
-        return null;
-    }
-
-    @Override
-    protected void getLoadView(LoadDataView loadView) {
-
-    }
-
     @OnClick({R.id.img_back, R.id.btn_forgetPsw, R.id.send_yzm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -71,7 +59,8 @@ public class ForgetPswActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_forgetPsw:
-                judgeData();
+//                judgeData();
+                finish();
                 break;
             case R.id.send_yzm:
                 String etUserPhone = etUserName.getText().toString();

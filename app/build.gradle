@@ -20,7 +20,6 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-
 }
 
 dependencies {
@@ -32,24 +31,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-    //retrofit
     implementation 'com.squareup.retrofit2:retrofit:+'
     implementation 'com.squareup.retrofit2:converter-gson:+'
-    //Rxjava2
     implementation 'io.reactivex.rxjava2:rxjava:+'
     implementation 'io.reactivex.rxjava2:rxandroid:+'
-    //让retrofit支持Rxjava2
     implementation 'com.squareup.retrofit2:adapter-rxjava2:+'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
-    //注解
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor "com.jakewharton:butterknife-compiler:8.5.1"
     implementation 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2'
     implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.github.HanHuoBin:BaseDialog:1.2.0'
-    //图片选择
-    implementation 'com.lzy.widget:imagepicker:0.6.1'
-    implementation project(':easeui')
 }

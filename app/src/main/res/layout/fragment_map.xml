@@ -5,28 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/gray5"
     android:orientation="vertical">
-
-    <include
-        android:id="@+id/include_home_title"
-        layout="@layout/home_layer_title" />
-
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/home_iv_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:src="@mipmap/map_xiangji" />
-
-    </RelativeLayout>
+        android:text="首页"
+        android:textSize="@dimen/text_16dp"
+        android:gravity="center"
+        android:layout_height="match_parent" />
 </LinearLayout>
