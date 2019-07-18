@@ -64,7 +64,7 @@
             android:textSize="14sp" />
 
 
-        <com.example.administrator.laundry.view.CountDownTextView
+        <com.project.Kang_Lee.laundry.view.CountDownTextView
             android:id="@+id/send_yzm"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.administrator.laundry"
+        applicationId "com.project.Kang_Lee.laundry"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -43,4 +43,7 @@ dependencies {
     implementation 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.2'
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    //原生微信支付
+    implementation files('libs/libammsdk.jar')
+    implementation files('libs/alipaySdk-20170407.jar')
 }

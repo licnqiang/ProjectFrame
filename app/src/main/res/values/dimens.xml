@@ -19,4 +19,5 @@
     <dimen name="text_20dp">20dp</dimen>
     <dimen name="text_24dp">24dp</dimen>
     <dimen name="text_34dp">30dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
