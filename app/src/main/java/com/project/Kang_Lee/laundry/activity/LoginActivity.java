@@ -4,6 +4,7 @@ package com.project.Kang_Lee.laundry.activity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.project.Kang_Lee.laundry.database.dbTab.UserInfo_Tab;
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
 import com.project.Kang_Lee.laundry.netService.data.Login;
 import com.project.Kang_Lee.laundry.netService.util.LoadingUI;
@@ -53,6 +54,9 @@ public class LoginActivity extends BaseActivity {
                 toActivity(ForgetPswActivity.class);
                 break;
             case R.id.btn_login:
+                UserInfo_Tab userInfo_tab=new UserInfo_Tab();
+                userInfo_tab.userName="李强";
+                userInfo_tab.save();
                 toActivity(MainActivity.class);
                 break;
         }

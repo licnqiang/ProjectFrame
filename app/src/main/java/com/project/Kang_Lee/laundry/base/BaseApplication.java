@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.util.Log;
 
 import com.project.Kang_Lee.laundry.base.receiver.NetWorkChangReceiver;
+import com.project.Kang_Lee.laundry.database.InitDBUtil;
 import com.project.Kang_Lee.laundry.util.SpHelper;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,6 +29,14 @@ public class BaseApplication extends Application {
         ApplicationContext = getApplicationContext();
         SpHelper.init(getApplicationContext());
         registerMessageReceiver();
+    }
+
+    /**
+     * 初始化数据库
+     * @param userID
+     */
+    public static void initDB(String userID){
+        InitDBUtil.initDB(ApplicationContext,userID);
     }
 
     //收集创建的Activity

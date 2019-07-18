@@ -26,7 +26,7 @@ public class CountDownTextView extends TextView {
     /**
      * 倒计时时间
      */
-    private long mCountDownMillis = 60_000;
+    private long mCountDownMillis = 3_000;
 
     /**
      * 剩余倒计时时间

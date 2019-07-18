@@ -44,16 +44,18 @@
 
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".activity.ForgetPswActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ChangPswActivity" />
         <activity android:name=".activity.PayActivity"/>
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!-- 原生微信支付回调 -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
