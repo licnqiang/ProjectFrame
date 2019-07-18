@@ -104,26 +104,6 @@ public class ForgetPswActivity extends BaseActivity {
             LoadingUI.hideDialogForLoading();
             ToastUtil.show(ForgetPswActivity.this,"验证码获取成功");
         }
-
-        @Override
-        public void onErro(Object o) {
-            if (o != null) {
-                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
-                int code = mBaseReseponseInfo.getFlag();
-                String msg = mBaseReseponseInfo.getInfo();
-                if (msg != null && msg.length() > 0) {
-                    Log.e("TAG-code", code + "");
-                    Log.e("TAG-msg", msg);
-                    Toast.makeText(
-                            BaseApplication.ApplicationContext,
-                            msg + " code:" + code,
-                            Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(ForgetPswActivity.this,
-                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
-            }
-        }
     };
 
 
@@ -138,26 +118,6 @@ public class ForgetPswActivity extends BaseActivity {
                         Toast.LENGTH_SHORT).show();
             }
             finish();
-        }
-
-        @Override
-        public void onErro(Object o) {
-            if (o != null) {
-                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
-                int code = mBaseReseponseInfo.getFlag();
-                String msg = mBaseReseponseInfo.getInfo();
-                if (msg != null && msg.length() > 0) {
-                    Log.e("TAG-code", code + "");
-                    Log.e("TAG-msg", msg);
-                    Toast.makeText(
-                            BaseApplication.ApplicationContext,
-                            msg + " code:" + code,
-                            Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(ForgetPswActivity.this,
-                        "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
-            }
         }
     };
 

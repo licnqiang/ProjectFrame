@@ -91,27 +91,6 @@ public class LoginActivity extends BaseActivity {
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, login.token);
             BaseApplication.token= SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);
         }
-
-        @Override
-        public void onErro(Object o) {
-            LoadingUI.hideDialogForLoading();
-            if (o != null) {
-                BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
-                int code = mBaseReseponseInfo.getFlag();
-                String msg = mBaseReseponseInfo.getInfo();
-                if (msg != null && msg.length() > 0) {
-                    Log.e("TAG-code", code + "");
-                    Log.e("TAG-msg", msg);
-                    Toast.makeText(
-                            BaseApplication.ApplicationContext,
-                            msg + " code:" + code,
-                            Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(LoginActivity.this,
-                        "用户不存在", Toast.LENGTH_SHORT).show();
-            }
-        }
     };
 
 }

@@ -6,6 +6,8 @@ import com.example.administrator.laundry.NetService.control.NetControl;
 import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
 import com.example.administrator.laundry.NetService.http.HttpConnector;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 
 
@@ -54,7 +56,7 @@ public class ForgetPswParser extends BaseParser {
 
     @Override
     protected void Error() {
-        listener.onErro(baseReseponseInfo);
+        EventBus.getDefault().post(baseReseponseInfo);
     }
 
 }

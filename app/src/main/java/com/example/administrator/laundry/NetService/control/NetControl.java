@@ -25,13 +25,6 @@ public class NetControl {
          */
         void onFinished(Object o);
 
-        /**
-         * 请求失败
-         *
-         * @param o 成功回调响应数据
-         */
-        void onErro(Object o);
-
     }
 
 

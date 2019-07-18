@@ -7,8 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.administrator.laundry.NetService.data.BaseReseponseInfo;
+import com.example.administrator.laundry.NetService.util.Log;
 import com.example.administrator.laundry.R;
+import com.example.administrator.laundry.activity.ChangPswActivity;
+import com.example.administrator.laundry.base.event.NetworkChangeEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BaseApplication.putActivityInfoToMap(this);
+        EventBus.getDefault().register(this);
         setContentView(getLayoutId());
         mBind = ButterKnife.bind(this);
         initView();
@@ -38,12 +48,58 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (null != mBind) {
             mBind.unbind();
         }
+        EventBus.getDefault().unregister(this);
         BaseApplication.removeActivityInfoFromMap(this);
     }
 
     public void toActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
+    }
+
+
+    /**
+     * 网络监听回调
+     *
+     * @author wangyj
+     * @time 2018/8/14 14:17
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventNetworkChange(NetworkChangeEvent event) {
+//        if(!event.isConnectNetwork){
+//            Toast.makeText(this,
+//                    "网络断开", Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+
+    /**
+     * 所有请求错误回掉
+     * 统一处理所有的网络错误
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventNetworkChange(BaseReseponseInfo event) {
+        RequestOnErro(event);
+    }
+
+
+    private void RequestOnErro(Object o){
+        if (o != null) {
+            BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
+            int code = mBaseReseponseInfo.getFlag();
+            String msg = mBaseReseponseInfo.getInfo();
+            if (msg != null && msg.length() > 0) {
+                Log.e("TAG-code", code + "");
+                Log.e("TAG-msg", msg);
+                Toast.makeText(
+                        BaseApplication.ApplicationContext,
+                        msg + " code:" + code,
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this,
+                    "网络连接失败，请稍后重试！", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

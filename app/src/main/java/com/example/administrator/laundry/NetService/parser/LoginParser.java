@@ -8,6 +8,8 @@ import com.example.administrator.laundry.NetService.http.HttpConnector;
 import com.example.administrator.laundry.NetService.util.Log;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 
 
@@ -62,7 +64,7 @@ public class LoginParser extends BaseParser {
 
     @Override
     protected void Error() {
-        listener.onErro(mInfo);
+        EventBus.getDefault().post(mInfo);
     }
 
 }

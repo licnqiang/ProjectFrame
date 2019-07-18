@@ -3,7 +3,11 @@ package com.example.administrator.laundry.base;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.util.Log;
+
+import com.example.administrator.laundry.base.receiver.NetWorkChangReceiver;
 import com.example.administrator.laundry.util.SpHelper;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,19 +20,14 @@ public class BaseApplication extends Application {
     public static String os = "AD";
     public static String version = "100";
     public static Context ApplicationContext;
-    // 记录是否已经初始化
-    private boolean isInit = false;
-
-    private static final String TAG = "MyApp";
 
     @Override
     public void onCreate() {
         super.onCreate();
         ApplicationContext = getApplicationContext();
         SpHelper.init(getApplicationContext());
+        registerMessageReceiver();
     }
-
-
 
     //收集创建的Activity
     public static void putActivityInfoToMap(Activity activity) {
@@ -65,8 +64,17 @@ public class BaseApplication extends Application {
                 activity.finish();
             }
         }
-
     }
 
+    /**
+     * 注册网络监听
+     */
+    private void registerMessageReceiver() {
+        // TODO Auto-generated method stub
+        NetWorkChangReceiver receiver = new NetWorkChangReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver, filter);
+    }
 
 }
