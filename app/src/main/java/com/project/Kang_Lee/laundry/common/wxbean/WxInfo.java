@@ -1,7 +1,7 @@
-package com.project.Kang_Lee.laundry.base.wxbean;
+package com.project.Kang_Lee.laundry.common.wxbean;
 
 import android.text.TextUtils;
-import com.project.Kang_Lee.laundry.base.BaseApplication;
+import com.project.Kang_Lee.laundry.common.BaseApplication;
 import org.json.JSONException;
 import org.json.JSONObject;
 

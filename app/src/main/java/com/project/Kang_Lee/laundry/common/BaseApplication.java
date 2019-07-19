@@ -1,4 +1,4 @@
-package com.project.Kang_Lee.laundry.base;
+package com.project.Kang_Lee.laundry.common;
 
 import android.app.Activity;
 import android.app.Application;
@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.util.Log;
 
-import com.project.Kang_Lee.laundry.base.receiver.NetWorkChangReceiver;
+import com.project.Kang_Lee.laundry.common.receiver.NetWorkChangReceiver;
 import com.project.Kang_Lee.laundry.database.InitDBUtil;
 import com.project.Kang_Lee.laundry.util.SpHelper;
 import java.util.Collection;

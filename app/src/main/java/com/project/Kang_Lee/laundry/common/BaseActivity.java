@@ -1,4 +1,4 @@
-package com.project.Kang_Lee.laundry.base;
+package com.project.Kang_Lee.laundry.common;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.project.Kang_Lee.laundry.netService.data.BaseReseponseInfo;
 import com.project.Kang_Lee.laundry.util.Log;
-import com.project.Kang_Lee.laundry.base.event.NetworkChangeEvent;
+import com.project.Kang_Lee.laundry.common.event.NetworkChangeEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

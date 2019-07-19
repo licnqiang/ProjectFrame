@@ -1,4 +1,4 @@
-package com.project.Kang_Lee.laundry.base.event;
+package com.project.Kang_Lee.laundry.common.event;
 
 /**
  * 网络连接类

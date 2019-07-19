@@ -5,7 +5,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
 import com.project.Kang_Lee.laundry.R;
-import com.project.Kang_Lee.laundry.base.BaseActivity;
+import com.project.Kang_Lee.laundry.common.BaseActivity;
 import com.project.Kang_Lee.laundry.ui.fragment.GroupFragment;
 import com.project.Kang_Lee.laundry.ui.fragment.HomeFragment;
 import com.project.Kang_Lee.laundry.ui.fragment.MeFragment;

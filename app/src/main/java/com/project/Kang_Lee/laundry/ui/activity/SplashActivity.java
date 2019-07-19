@@ -14,7 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.project.Kang_Lee.laundry.R;
-import com.project.Kang_Lee.laundry.base.BaseActivity;
+import com.project.Kang_Lee.laundry.common.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
     String[] mPerms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};

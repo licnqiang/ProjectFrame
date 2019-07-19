@@ -1,4 +1,4 @@
-package com.project.Kang_Lee.laundry.base.receiver;
+package com.project.Kang_Lee.laundry.common.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
-import com.project.Kang_Lee.laundry.base.event.NetworkChangeEvent;
+import com.project.Kang_Lee.laundry.common.event.NetworkChangeEvent;
 import org.greenrobot.eventbus.EventBus;
 
 

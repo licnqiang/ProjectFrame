@@ -9,8 +9,8 @@ import android.view.View;
 
 import com.alipay.sdk.app.PayTask;
 import com.project.Kang_Lee.laundry.R;
-import com.project.Kang_Lee.laundry.base.BaseActivity;
-import com.project.Kang_Lee.laundry.base.wxbean.WxInfo;
+import com.project.Kang_Lee.laundry.common.BaseActivity;
+import com.project.Kang_Lee.laundry.common.wxbean.WxInfo;
 import com.project.Kang_Lee.laundry.util.PayResult;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;

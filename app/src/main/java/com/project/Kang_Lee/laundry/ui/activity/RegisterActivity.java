@@ -2,7 +2,7 @@ package com.project.Kang_Lee.laundry.ui.activity;
 
 
 import com.project.Kang_Lee.laundry.R;
-import com.project.Kang_Lee.laundry.base.BaseActivity;
+import com.project.Kang_Lee.laundry.common.BaseActivity;
 
 import java.util.HashMap;
 

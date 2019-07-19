@@ -4,7 +4,7 @@ package com.project.Kang_Lee.laundry.ui.fragment;
 import android.support.v4.app.Fragment;
 
 import com.project.Kang_Lee.laundry.R;
-import com.project.Kang_Lee.laundry.base.BaseFragment;
+import com.project.Kang_Lee.laundry.common.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.

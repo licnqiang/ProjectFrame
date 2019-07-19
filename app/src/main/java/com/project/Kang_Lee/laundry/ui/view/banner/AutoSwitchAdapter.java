@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.project.Kang_Lee.laundry.R;
-import com.project.Kang_Lee.laundry.base.BaseApplication;
+import com.project.Kang_Lee.laundry.common.BaseApplication;
 import java.util.List;
 
 /**

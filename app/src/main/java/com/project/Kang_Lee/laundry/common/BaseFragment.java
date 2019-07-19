@@ -1,4 +1,4 @@
-package com.project.Kang_Lee.laundry.base;
+package com.project.Kang_Lee.laundry.common;
 
 
 import android.content.Intent;
