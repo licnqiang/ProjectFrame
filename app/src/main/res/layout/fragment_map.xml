@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:background="@color/gray5"
     android:orientation="vertical">
+    <com.project.Kang_Lee.laundry.view.AutoSwitchView
+        android:id="@+id/loopswitch"
+        android:layout_width="match_parent"
+        android:layout_height="175dp">
+    </com.project.Kang_Lee.laundry.view.AutoSwitchView>
     <TextView
         android:layout_width="match_parent"
         android:text="首页"

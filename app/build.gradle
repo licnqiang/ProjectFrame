@@ -51,6 +51,7 @@ dependencies {
     implementation "com.wuxiaolong.pullloadmorerecyclerview:library:$rootProject.recyclerview_version"
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
+    implementation project(':loopswitch')
     //原生微信支付
     implementation files('libs/libammsdk.jar')
     implementation files('libs/alipaySdk-20170407.jar')
