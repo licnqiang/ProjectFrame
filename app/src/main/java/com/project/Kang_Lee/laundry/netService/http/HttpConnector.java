@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.project.Kang_Lee.laundry.netService.util.Log;
+import com.project.Kang_Lee.laundry.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

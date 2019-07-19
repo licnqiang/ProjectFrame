@@ -31,13 +31,13 @@
         android:theme="@style/AppTheme"
         tools:replace="android:name">
 
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity"/>
-        <activity android:name=".activity.ForgetPswActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.ChangPswActivity" />
-        <activity android:name=".activity.PayActivity"/>
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.ForgetPswActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.ChangPswActivity" />
+        <activity android:name=".ui.activity.PayActivity"/>
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

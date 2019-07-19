@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.project.Kang_Lee.laundry.netService.data.BaseReseponseInfo;
-import com.project.Kang_Lee.laundry.netService.util.Log;
+import com.project.Kang_Lee.laundry.util.Log;
 import com.project.Kang_Lee.laundry.base.event.NetworkChangeEvent;
 
 import org.greenrobot.eventbus.EventBus;

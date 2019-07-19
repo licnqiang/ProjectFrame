@@ -2,10 +2,11 @@
 package com.project.Kang_Lee.laundry.netService.parser;
 
 
+import com.google.gson.Gson;
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
 import com.project.Kang_Lee.laundry.netService.data.BaseReseponseInfo;
 import com.project.Kang_Lee.laundry.netService.http.HttpConnector;
-import com.project.Kang_Lee.laundry.netService.util.Log;
+import com.project.Kang_Lee.laundry.util.Log;
 import com.project.Kang_Lee.laundry.constant.UrlContant;
 
 import org.greenrobot.eventbus.EventBus;

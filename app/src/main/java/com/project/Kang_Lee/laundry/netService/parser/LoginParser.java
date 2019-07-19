@@ -5,7 +5,7 @@ package com.project.Kang_Lee.laundry.netService.parser;
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
 import com.project.Kang_Lee.laundry.netService.data.Login;
 import com.project.Kang_Lee.laundry.netService.http.HttpConnector;
-import com.project.Kang_Lee.laundry.netService.util.Log;
+import com.project.Kang_Lee.laundry.util.Log;
 import com.project.Kang_Lee.laundry.constant.UrlContant;
 import com.google.gson.Gson;
 

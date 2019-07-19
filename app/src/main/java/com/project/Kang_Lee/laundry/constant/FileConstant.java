@@ -11,7 +11,8 @@ import java.io.File;
  * @describe TODO
  */
 public class FileConstant {
-    public static final String PROJECT_DB_NAME = "laundry/DB";
+    public static final String PROJECT_NAME = "laundry";
+    public static final String DB_NAME = "DB";
     public static String STR_SDCARD_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     public static String hasFileAndCreate(String filePath) {
@@ -33,7 +34,8 @@ public class FileConstant {
     public static String getDBPath(String userId) {
         StringBuilder sb = new StringBuilder();
         sb.append(getRootPath()).append(File.separator)
-                .append(PROJECT_DB_NAME).append(File.separator)
+                .append(PROJECT_NAME).append(File.separator)
+                .append(DB_NAME).append(File.separator)
                 .append(userId);
         return hasFileAndCreate(sb.toString());
     }

@@ -1,1 +1,1 @@
-include ':app', ':loopswitch'
+include ':app'

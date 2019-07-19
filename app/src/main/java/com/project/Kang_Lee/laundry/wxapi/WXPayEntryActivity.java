@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.project.Kang_Lee.laundry.R;
 import com.project.Kang_Lee.laundry.base.BaseActivity;
 import com.project.Kang_Lee.laundry.base.BaseApplication;
+import com.project.Kang_Lee.laundry.util.ToastUtil;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -69,12 +70,15 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         int code = resp.errCode;
         //支付成功
         if (code == 0){
+            ToastUtil.show(this,"支付成功");
         }
         if (code == -1){
             //错误
+            ToastUtil.show(this,"支付错误");
         }
         if (code == -2){
             //用户取消
+            ToastUtil.show(this,"用户取消");
         }
     }
     public static void setWXCallBack(WXCallBack callBack){

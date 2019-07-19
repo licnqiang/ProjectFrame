@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity"
+    tools:context=".ui.activity.MainActivity"
     android:orientation="vertical">
     <FrameLayout
         android:id="@+id/fl_container"
@@ -12,7 +12,7 @@
         android:layout_weight="1">
 
     </FrameLayout>
-    <com.project.Kang_Lee.laundry.view.BottomBar
+    <com.project.Kang_Lee.laundry.ui.view.BottomBar
         android:background="#FFFFFF"
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
