@@ -61,12 +61,14 @@ public class SplashActivity extends BaseActivity {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     j++;
-                    if (j == 3) {
+                    if (j == 4) {
                         starMain();
                     }
-                } else {
-                    showPermiDialog();
                 }
+            }
+
+            if(j!=4){
+                showPermiDialog();
             }
         }
     }
