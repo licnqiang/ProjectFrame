@@ -69,7 +69,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void showLoadingDialog(String message, boolean cancelable) {
-        loadingDialog.setMessage(message);
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }
@@ -84,11 +83,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 跳转界面
      */
-    public void toActivity(Class<?> cls, Object message) {
+    public void toActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls);
-        if (null!=message) {
-            intent.putExtra(SysContant.sysContats.intent_key, message.toString());
-        }
         startActivity(intent);
     }
 
@@ -100,7 +96,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventNetworkChange(NetworkChangeEvent event) {
-        Log.i("netType", "netType:" + event.networkType);
+        Log.e("netType", "netType:" + event.networkType);
         if (!NetUtil.isNetConnect(event.networkType)) {
             ToastUtil.show(this, "网络异常");
         } else {

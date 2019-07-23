@@ -7,7 +7,7 @@ package com.project.Kang_Lee.laundry.netService.data;
  * @describe TODO
  */
 
-public class Login extends BaseReseponseInfo {
+public class LoginInfo extends BaseReseponseInfo {
     public String token;
 
 }

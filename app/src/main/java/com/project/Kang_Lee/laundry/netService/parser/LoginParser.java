@@ -3,7 +3,7 @@ package com.project.Kang_Lee.laundry.netService.parser;
 
 
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
-import com.project.Kang_Lee.laundry.netService.data.Login;
+import com.project.Kang_Lee.laundry.netService.data.LoginInfo;
 import com.project.Kang_Lee.laundry.netService.http.HttpConnector;
 import com.project.Kang_Lee.laundry.util.Log;
 import com.project.Kang_Lee.laundry.constant.UrlContant;
@@ -22,7 +22,7 @@ import java.util.HashMap;
  */
 public class LoginParser extends BaseParser {
 
-    private Login mInfo;
+    private LoginInfo mInfo;
 
     private String url = UrlContant.login;
 
@@ -52,7 +52,7 @@ public class LoginParser extends BaseParser {
     protected void parser() {
         try {
             Log.e("-----------","-------------"+new Gson().toJson(mJson));
-            mInfo = new Gson().fromJson(mJson.toString(), Login.class);
+            mInfo = new Gson().fromJson(mJson.toString(), LoginInfo.class);
         } catch (Exception e) {
             Log.e(TAG, CLASS_NAME + "--e==" + e);
         }

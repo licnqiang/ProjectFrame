@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 import com.project.Kang_Lee.laundry.database.dbTab.UserInfo_Tab;
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
-import com.project.Kang_Lee.laundry.netService.data.Login;
+import com.project.Kang_Lee.laundry.netService.data.LoginInfo;
 import com.project.Kang_Lee.laundry.R;
 import com.project.Kang_Lee.laundry.common.BaseActivity;
 import com.project.Kang_Lee.laundry.common.BaseApplication;
@@ -85,7 +85,7 @@ public class LoginActivity extends BaseActivity {
             if(null==o){
                 return;
             }
-            Login login=(Login)o;
+            LoginInfo login=(LoginInfo)o;
             //保存token
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, login.token);
             BaseApplication.token= SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);
