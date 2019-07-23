@@ -7,8 +7,8 @@ package com.project.Kang_Lee.laundry.common.event;
  */
 
 public class NetworkChangeEvent {
-    public boolean isConnectNetwork;
-    public NetworkChangeEvent(boolean isConnectNetwork) {
-        this.isConnectNetwork=isConnectNetwork;
+    public int networkType;
+    public NetworkChangeEvent(int networkType) {
+        this.networkType=networkType;
     }
 }

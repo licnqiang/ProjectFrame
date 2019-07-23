@@ -46,6 +46,7 @@ dependencies {
     implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
+    implementation "com.github.HanHuoBin:BaseDialog:$rootProject.dialog_version"
     implementation 'com.squareup.retrofit2:retrofit:+'
     implementation 'com.squareup.retrofit2:converter-gson:+'
     implementation 'io.reactivex.rxjava2:rxjava:+'

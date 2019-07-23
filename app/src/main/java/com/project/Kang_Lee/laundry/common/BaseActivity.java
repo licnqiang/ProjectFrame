@@ -1,13 +1,20 @@
 package com.project.Kang_Lee.laundry.common;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
+import com.hb.dialog.dialog.LoadingDialog;
 import com.project.Kang_Lee.laundry.netService.data.BaseReseponseInfo;
+import com.project.Kang_Lee.laundry.util.DialogUtils;
 import com.project.Kang_Lee.laundry.util.Log;
 import com.project.Kang_Lee.laundry.common.event.NetworkChangeEvent;
+import com.project.Kang_Lee.laundry.util.NetUtil;
+import com.project.Kang_Lee.laundry.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -16,16 +23,22 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public abstract class BaseActivity extends AppCompatActivity {
     Unbinder mBind;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //全部禁止横屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         BaseApplication.putActivityInfoToMap(this);
         EventBus.getDefault().register(this);
         setContentView(getLayoutId());
         mBind = ButterKnife.bind(this);
+        initLoadingDialog();
         initView();
         initData();
     }
@@ -46,6 +59,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         BaseApplication.removeActivityInfoFromMap(this);
     }
 
+    protected void initLoadingDialog(){
+        if (null==loadingDialog) {
+            loadingDialog = new LoadingDialog(this);
+        }
+    }
+
+    public void showLoadingDialog(String message,boolean cancelable){
+        loadingDialog.setMessage(message);
+        loadingDialog.setCancelable(cancelable);
+        loadingDialog.show();
+    }
+
+
+    /**
+     * 跳转界面
+     */
     public void toActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
@@ -54,17 +83,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 网络监听回调
-     *
-     * @author wangyj
      * @time 2018/8/14 14:17
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventNetworkChange(NetworkChangeEvent event) {
-//        if(!event.isConnectNetwork){
-//            Toast.makeText(this,
-//                    "网络断开", Toast.LENGTH_SHORT).show();
-//        }
+        Log.i("netType", "netType:" + event.networkType);
+        if (!NetUtil.isNetConnect(event.networkType)) {
+            ToastUtil.show(this, "网络异常");
+        } else {
+            ToastUtil.show(this, "网络恢复");
+        }
     }
+
+
 
 
     /**
@@ -76,8 +107,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         RequestOnErro(event);
     }
 
-
-    private void RequestOnErro(Object o){
+    private void RequestOnErro(Object o) {
         if (o != null) {
             BaseReseponseInfo mBaseReseponseInfo = (BaseReseponseInfo) o;
             int code = mBaseReseponseInfo.getFlag();

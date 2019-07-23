@@ -7,7 +7,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
 import com.project.Kang_Lee.laundry.netService.data.BaseReseponseInfo;
-import com.project.Kang_Lee.laundry.util.LoadingUI;
 import com.project.Kang_Lee.laundry.R;
 import com.project.Kang_Lee.laundry.common.BaseActivity;
 import com.project.Kang_Lee.laundry.common.BaseApplication;
@@ -89,7 +88,6 @@ public class ChangPswActivity extends BaseActivity {
             mHashMap.put("userPhone", userName);
             mHashMap.put("proof", userYzm);
             mHashMap.put("userPassword", userNextPsw);
-            LoadingUI.showDialogForLoading(this, "正在加载", true);
             NetControl.changpsw(registerCallback, mHashMap);
         }
     }
@@ -113,7 +111,6 @@ public class ChangPswActivity extends BaseActivity {
     NetControl.GetResultListenerCallback callback = new NetControl.GetResultListenerCallback() {
         @Override
         public void onFinished(Object o) {
-            LoadingUI.hideDialogForLoading();
             ToastUtil.show(ChangPswActivity.this, "验证码获取成功");
         }
     };

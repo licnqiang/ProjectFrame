@@ -7,7 +7,6 @@ import android.widget.EditText;
 import com.project.Kang_Lee.laundry.database.dbTab.UserInfo_Tab;
 import com.project.Kang_Lee.laundry.netService.control.NetControl;
 import com.project.Kang_Lee.laundry.netService.data.Login;
-import com.project.Kang_Lee.laundry.util.LoadingUI;
 import com.project.Kang_Lee.laundry.R;
 import com.project.Kang_Lee.laundry.common.BaseActivity;
 import com.project.Kang_Lee.laundry.common.BaseApplication;
@@ -71,7 +70,6 @@ public class LoginActivity extends BaseActivity {
         } else {
             mHashMap.put("userPhone", userName);
             mHashMap.put("userPassword", userPsw);
-            LoadingUI.showDialogForLoading(this,"正在登录",true);
             NetControl.Login(callback, mHashMap);
         }
 //                toActivity(MainActivity.class);
@@ -88,7 +86,6 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
             Login login=(Login)o;
-            LoadingUI.hideDialogForLoading();
             //保存token
             SpHelper.setStringValue(SysContant.userInfo.USER_TOKEN, login.token);
             BaseApplication.token= SpHelper.getStringValue(SysContant.userInfo.USER_TOKEN);

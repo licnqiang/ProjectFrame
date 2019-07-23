@@ -21,28 +21,22 @@ public class WxInfo {
     private String sign;                          //签名
 
     public WxInfo() {
+
     }
 
     public WxInfo(String info) throws JSONException {
-
         if (TextUtils.isEmpty(info)) {
-
             return;
         }
-
             JSONObject jsonObject = new JSONObject(info);  //String转jsonObject
-
             appId=jsonObject.optString("appid");
-
             BaseApplication.App_ID=appId;       //保存appid,在微信支付回调页面使用
-
             partnerId=jsonObject.optString("partnerid");
             prepayId=jsonObject.optString("prepayid");
             packageValue=jsonObject.optString("package");
             nonceStr=jsonObject.optString("noncestr");
             timeStamp=jsonObject.optString("timestamp");
             sign=jsonObject.optString("sign");
-
     }
 
     public String getAppId() {

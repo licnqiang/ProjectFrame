@@ -3,6 +3,8 @@ package com.project.Kang_Lee.laundry.ui.fragment;
 
 import android.support.v4.app.Fragment;
 
+import com.hb.dialog.dialog.LoadingDialog;
+import com.hb.dialog.myDialog.MyPayInputDialog;
 import com.project.Kang_Lee.laundry.R;
 import com.project.Kang_Lee.laundry.common.BaseFragment;
 import com.project.Kang_Lee.laundry.ui.view.banner.AutoSwitchAdapter;
@@ -40,6 +42,8 @@ public class HomeFragment extends BaseFragment {
         im.add("");
         mAdapter = new AutoSwitchAdapter(getActivity(), im);
         loopswitch.setAdapter(mAdapter);
+
+        showLoadingDialog("我的",true);
     }
 
     @Override

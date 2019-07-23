@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.util.Log;
 
 import com.project.Kang_Lee.laundry.common.receiver.NetWorkChangReceiver;
@@ -80,11 +81,13 @@ public class BaseApplication extends Application {
      * 注册网络监听
      */
     private void registerMessageReceiver() {
-        // TODO Auto-generated method stub
-        NetWorkChangReceiver receiver = new NetWorkChangReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(receiver, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            // TODO Auto-generated method stub
+            NetWorkChangReceiver receiver = new NetWorkChangReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            registerReceiver(receiver, filter);
+        }
     }
 
 }
