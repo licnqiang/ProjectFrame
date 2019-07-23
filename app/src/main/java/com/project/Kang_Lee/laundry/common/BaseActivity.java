@@ -55,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (null != mBind) {
             mBind.unbind();
         }
+        dismiss();
         EventBus.getDefault().unregister(this);
         BaseApplication.removeActivityInfoFromMap(this);
     }
@@ -69,6 +70,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         loadingDialog.setMessage(message);
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
+    }
+
+    public void dismiss() {
+        if (null != loadingDialog && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
     }
 
 

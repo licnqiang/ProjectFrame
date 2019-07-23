@@ -55,10 +55,17 @@ public abstract class BaseFragment extends Fragment {
         loadingDialog.show();
     }
 
+    public void dismiss() {
+        if (null != loadingDialog && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         bind.unbind();
+        dismiss();
     }
 
 
