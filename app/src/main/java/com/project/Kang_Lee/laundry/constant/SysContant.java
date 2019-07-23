@@ -7,6 +7,11 @@ package com.project.Kang_Lee.laundry.constant;
  * @describe 保存配置
  */
 public class SysContant {
+
+    public interface sysContats{
+        String intent_key="intentData";
+    }
+
     /**
      * 用户配置
      */

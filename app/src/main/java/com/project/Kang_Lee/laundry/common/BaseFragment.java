@@ -4,11 +4,13 @@ package com.project.Kang_Lee.laundry.common;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hb.dialog.dialog.LoadingDialog;
+import com.project.Kang_Lee.laundry.constant.SysContant;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -32,8 +34,11 @@ public abstract class BaseFragment extends Fragment {
         return mContextView;
     }
 
-    public void toActivity(Class<?> cls) {
+    public void toActivity(Class<?> cls, Object message) {
         Intent intent = new Intent(getActivity(), cls);
+        if (null != message) {
+            intent.putExtra(SysContant.sysContats.intent_key, message.toString());
+        }
         startActivity(intent);
     }
 

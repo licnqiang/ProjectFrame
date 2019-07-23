@@ -5,10 +5,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import com.hb.dialog.dialog.LoadingDialog;
+import com.project.Kang_Lee.laundry.constant.SysContant;
 import com.project.Kang_Lee.laundry.netService.data.BaseReseponseInfo;
 import com.project.Kang_Lee.laundry.util.DialogUtils;
 import com.project.Kang_Lee.laundry.util.Log;
@@ -60,13 +62,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         BaseApplication.removeActivityInfoFromMap(this);
     }
 
-    protected void initLoadingDialog(){
-        if (null==loadingDialog) {
+    protected void initLoadingDialog() {
+        if (null == loadingDialog) {
             loadingDialog = new LoadingDialog(this);
         }
     }
 
-    public void showLoadingDialog(String message,boolean cancelable){
+    public void showLoadingDialog(String message, boolean cancelable) {
         loadingDialog.setMessage(message);
         loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
@@ -82,14 +84,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 跳转界面
      */
-    public void toActivity(Class<?> cls) {
+    public void toActivity(Class<?> cls, Object message) {
         Intent intent = new Intent(this, cls);
+        if (null!=message) {
+            intent.putExtra(SysContant.sysContats.intent_key, message.toString());
+        }
         startActivity(intent);
     }
 
 
     /**
      * 网络监听回调
+     *
      * @time 2018/8/14 14:17
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -101,8 +107,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             ToastUtil.show(this, "网络恢复");
         }
     }
-
-
 
 
     /**
